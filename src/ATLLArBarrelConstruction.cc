@@ -20,6 +20,7 @@
 //Includers from project files
 //
 #include "ATLLArBarrelConstruction.hh"
+#include "LArTBCryostatConstruction.hh"
 
 ATLLArBarrelConstruction::ATLLArBarrelConstruction(){};
 
@@ -67,6 +68,16 @@ G4VPhysicalVolume* ATLLArBarrelConstruction::Construct(){
 		          false, 
 		          0);
 
+    // insert test beam cryostat (calorimeter module is inserted inside cryostat)
+    LArTBCryostatConstruction* cryostat = new LArTBCryostatConstruction();
+    G4LogicalVolume* tbcryostatmotherLog = cryostat->GetEnvelope();
+    G4VPhysicalVolume* tbcryostatmotherPhys = new G4PVPlacement(0, 
+                                                                G4ThreeVector(0.,0.,+2000.),
+                                                                "LAr::TBBarrel::Cryostat::MotherPhys",
+                                                                tbcryostatmotherLog,
+                                                                experimentalHall_phys,
+                                                                false,
+                                                                0);
     return experimentalHall_phys;
 
 }
