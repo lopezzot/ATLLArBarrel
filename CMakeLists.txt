@@ -4,7 +4,7 @@ cmake_minimum_required(VERSION 3.8...3.18)
 if(${CMAKE_VERSION} VERSION_LESS 3.12)
   cmake_policy(VERSION ${CMAKE_MAJOR_VERSION}.${CMAKE_MINOR_VERSION})
 endif()
-project(B5)
+project(ATLLARBARREL)
 
 #----------------------------------------------------------------------------
 # Find Geant4 package, activating all available UI and Vis drivers by default
@@ -49,9 +49,10 @@ set(ATLLArBarrel_SCRIPT
   init.mac
   init_vis.mac
   vis.mac
+  icons.mac
   )
 
-foreach(_script ${ATLLArBarrel})
+foreach(_script ${ATLLArBarrel_SCRIPT})
   configure_file(
     ${PROJECT_SOURCE_DIR}/${_script}
     ${PROJECT_BINARY_DIR}/${_script}
@@ -63,7 +64,7 @@ endforeach()
 # Add program to the project targets
 # (this avoids the need of typing the program name after make)
 #
-add_custom_target(ATLLARBARREL DEPENDS ATLLArBarrel)
+add_custom_target(ATLASBARREL DEPENDS ATLLArBarrel)
 
 #----------------------------------------------------------------------------
 # Install the executable to 'bin' directory under CMAKE_INSTALL_PREFIX

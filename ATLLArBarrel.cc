@@ -6,18 +6,25 @@
 // \start date: 3 August 2022
 //**************************************************
 
-//Includers from Geant4
-//
-#include "G4RunManagerFactory.hh"
-#include "G4UImanager.hh"
-#include "FTFP_BERT.hh"
-#include "G4StepLimiterPhysics.hh"
-#include "G4VisExecutive.hh"
-#include "G4UIExecutive.hh"
-
 //Includers from project files
 //
 #include "ATLLArBarrelConstruction.hh"
+#include "ATLLArBarrelActIni.hh"
+
+//Includers from Geant4
+//
+#ifndef G4MULTITHREADED
+#include "G4RunManager.hh"
+#else
+#include "G4MTRunManager.hh"
+#include "G4Threading.hh"
+#endif
+//#include "G4RunManagerFactory.hh" //only available from 10.7 on
+#include "G4UImanager.hh"
+#include "G4PhysListFactory.hh"
+#include "G4VisExecutive.hh"
+#include "G4UIExecutive.hh"
+#include "G4UIcommand.hh"
 
 //Output helpers
 //
@@ -91,8 +98,9 @@ int main(int argc,char** argv) {
     //
     auto physListFactory = new G4PhysListFactory();
     auto physicsList = physListFactory->GetReferencePhysList( custom_pl );
-    runManager->SetUserInitialization(physicsList);}
+    runManager->SetUserInitialization(physicsList);
     runManager->SetUserInitialization(new ATLLArBarrelConstruction());
+    runManager->SetUserInitialization(new ATLLArBarrelActIni());
     
     //Visualization manager construction
     //
