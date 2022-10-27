@@ -13,6 +13,7 @@
 //
 #include "LArTBCryostatConstruction.hh"
 #include "LArBarrelConstruction.hh"
+#include "LArBarrelPresamplerConstruction.hh"
 
 //Includers from Geant4
 //
@@ -750,6 +751,41 @@ G4LogicalVolume* LArTBCryostatConstruction::GetEnvelope() {
                            false,                      // Boolean volume?
                            0);                         // Copy number
     
+    //#endif
+
+
+    // ------------------------------------------------------------------------
+    // Place the Presampler test module inside the LAr volume (moth_phys)
+    // ------------------------------------------------------------------------
+    //#ifdef BUILD_PRESAMPLER
+
+    LArBarrelPresamplerConstruction * ps = new LArBarrelPresamplerConstruction(1);
+    //g4vis->AddConsultant( new LArBarrelPresamplerVisualConsultant() );
+    //g4sdc->AddConsultant( new LArBarrelPresamplerSDConsultant() );
+
+    G4LogicalVolume* barrelPSEnvelope = ps->GetEnvelope();
+
+    // PS lenght = 2*1582.5
+    // start should be a z=0 in Atlas  => z = -LAr_z_max/2.+Cryo_z0 in moth_phys
+    // center of PS in moth phys should be at 1582.5-Cryo_Distz+Cryo_z0 in moth_phys
+
+    //   Zcd = 1582.5-LAr_z_max/2.+Cryo_z0;
+    // new value of PS mother lenght
+    Zcd = 1550.0*mm-LAr_z_max/2.+Cryo_z0;
+
+    //#ifdef DEBUG_GEO
+    //std::cout << " " << std::endl;
+    //std::cout << " Position PS volume in mother LAr at z " << Zcd << std::endl;
+    //#endif
+
+    G4VPhysicalVolume * barrelPSPhysical =
+        new G4PVPlacement(0,
+                         G4ThreeVector(0.,0.,Zcd),
+                         barrelPSEnvelope->GetName(),
+                         barrelPSEnvelope,
+                         moth_phys,
+                         false,
+                         0);
     //#endif
 
     return Em_log;
