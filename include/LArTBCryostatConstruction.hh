@@ -28,6 +28,6 @@ class LArTBCryostatConstruction{
 
 };
 
-#endif //LArTBCryostaConstruction_h 1
+#endif //LArTBCryostatConstruction_h 1
 
 //**************************************************

@@ -70,7 +70,7 @@ G4VPhysicalVolume* ATLLArBarrelConstruction::Construct(){
 
     // insert test beam cryostat (calorimeter module is inserted inside cryostat)
     LArTBCryostatConstruction* cryostat = new LArTBCryostatConstruction();
-    G4LogicalVolume* tbcryostatmotherLog = cryostat->GetEnvelope();
+    G4LogicalVolume* tbcryostatmotherLog = cryostat->GetEnvelope(); //Em_log
     G4VPhysicalVolume* tbcryostatmotherPhys = new G4PVPlacement(0, 
                                                                 G4ThreeVector(0.,0.,+2000.),
                                                                 "LAr::TBBarrel::Cryostat::MotherPhys",
@@ -78,6 +78,8 @@ G4VPhysicalVolume* ATLLArBarrelConstruction::Construct(){
                                                                 experimentalHall_phys,
                                                                 false,
                                                                 0);
+    tbcryostatmotherLog->SetVisAttributes( G4VisAttributes::GetInvisible() );
+
     return experimentalHall_phys;
 
 }

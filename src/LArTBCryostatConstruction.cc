@@ -12,6 +12,7 @@
 //Includers from project files
 //
 #include "LArTBCryostatConstruction.hh"
+#include "LArBarrelConstruction.hh"
 
 //Includers from Geant4
 //
@@ -26,6 +27,7 @@
 #include "G4SystemOfUnits.hh"
 #include "G4Polycone.hh"
 #include "G4Tubs.hh"
+#include "G4VisAttributes.hh"
 
 LArTBCryostatConstruction::LArTBCryostatConstruction(){}
 LArTBCryostatConstruction::~LArTBCryostatConstruction(){}
@@ -108,15 +110,13 @@ G4LogicalVolume* LArTBCryostatConstruction::GetEnvelope() {
                        kStateGas,temperature,pressure);
 
 
-
     //--------------------------------------------------
     //Define Geometries
     //--------------------------------------------------
 
-
     //Big mother volume to be included in transparent way in Calo Ctb envelope
     //
-    G4double zp[3]    ={-1050.,0.,3810.};
+    G4double zp[3]   ={-1050.,0.,3810.};
     G4double ri[3]   ={965.,965.,965.};
     G4double ro[3]   ={2270.,2270.,2270.};
 /*#ifdef DEBUG_GEO
@@ -201,6 +201,8 @@ G4LogicalVolume* LArTBCryostatConstruction::GetEnvelope() {
     G4LogicalVolume *Cent_log = new G4LogicalVolume(Cent_tube,
                                                     Foam,
                                    "LAr::TBBarrel::Cryostat::Mother");
+    Cent_log->SetVisAttributes( G4VisAttributes::GetInvisible() );
+
     //g4sdc->SetSD(Cent_log);
 
     // position in Pcon mother envelope (which has Atlas reference frame)
@@ -345,8 +347,14 @@ G4LogicalVolume* LArTBCryostatConstruction::GetEnvelope() {
     G4LogicalVolume *moth_log = new G4LogicalVolume(moth_tube,
                                                     LAr,
                                   "LAr::TBBarrel::Cryostat::LAr");
-    //g4sdc->SetSD(moth_log);
 
+    auto LArVisAttributes = new G4VisAttributes();
+    LArVisAttributes->SetForceSolid( true );
+    LArVisAttributes->SetColour( G4Color::Cyan().GetRed(), G4Color::Cyan().GetGreen(), G4Color::Cyan().GetBlue(), 0.2);
+    moth_log->SetVisAttributes( LArVisAttributes );
+
+    //moth_log->SetVisAttributes( VisAttributes::LArVisAttributes );
+    //g4sdc->SetSD(moth_log);
 
     // Physical volume
     G4VPhysicalVolume *moth_phys = new G4PVPlacement(0,
@@ -431,6 +439,10 @@ G4LogicalVolume* LArTBCryostatConstruction::GetEnvelope() {
                << DeltaR3_ring << " " << DeltaZ3_ring << std::endl;
 #endif*/
 
+     auto ringVisAttributes = new G4VisAttributes();
+     ringVisAttributes->SetForceSolid( true );
+     ringVisAttributes->SetColor( G4Color::Grey() );
+     ringVisAttributes->SetDaughtersInvisible( true );
 
      G4Tubs * ring1_shape = new G4Tubs("LAr::TBBarrel::Cryostat::Ring1",
                                  R_ring,
@@ -442,6 +454,8 @@ G4LogicalVolume* LArTBCryostatConstruction::GetEnvelope() {
      G4LogicalVolume *ring1_log = new G4LogicalVolume(ring1_shape,
                                                      Iron,
                                    "LAr::TBBarrel::Cryostat::Ring1");
+     ring1_log->SetVisAttributes( ringVisAttributes );
+
      //g4sdc->SetSD(ring1_log);
 
      G4Tubs * ring2_shape = new G4Tubs("LAr::TBBarrel::Cryostat::Ring2",
@@ -454,6 +468,7 @@ G4LogicalVolume* LArTBCryostatConstruction::GetEnvelope() {
      G4LogicalVolume *ring2_log = new G4LogicalVolume(ring2_shape,
                                                      Iron,
                                    "LAr::TBBarrel::Cryostat::Ring2");
+     ring2_log->SetVisAttributes( ringVisAttributes );
      //g4sdc->SetSD(ring2_log);
 
      G4Tubs * ring3_shape = new G4Tubs("LAr::TBBarrel::Cryostat::Ring3",
@@ -466,6 +481,7 @@ G4LogicalVolume* LArTBCryostatConstruction::GetEnvelope() {
      G4LogicalVolume *ring3_log = new G4LogicalVolume(ring3_shape,
                                                      Iron,
                                    "LAr::TBBarrel::Cryostat::Ring3");
+     ring3_log->SetVisAttributes( ringVisAttributes );
      //g4sdc->SetSD(ring3_log);
 
      static double zring[6] = {397.,805.,1255.,1750.,2316.,2868.};
@@ -681,6 +697,7 @@ G4LogicalVolume* LArTBCryostatConstruction::GetEnvelope() {
     G4LogicalVolume *CryoEndC_log = new G4LogicalVolume(CryoEndC_tube,
                                                      Aluminium,
                                      "LAr::TBBarrel::Cryostat::EndCold");
+
     //g4vis->SetVis(CryoEndC_log);
     //g4sdc->SetSD(CryoEndC_log);
 
@@ -700,19 +717,38 @@ G4LogicalVolume* LArTBCryostatConstruction::GetEnvelope() {
 
 //#endif
 
+    // --------------------------------------------------------------------
+    // Place the barrel test module inside the LAR volume (moth_phys)
+    // --------------------------------------------------------------------
 
+    //#ifdef BUILD_LARMODULE
+    LArBarrelConstruction * barrel = new LArBarrelConstruction();
+    //g4vis->AddConsultant( new LArBarrelVisualConsultant() );
+    //g4sdc->AddConsultant( new LArBarrelSDConsultant() );
 
+    G4cout << "before GetEnvelope barrel " << G4endl;
 
+    G4LogicalVolume* barrelPosEnvelope = barrel->GetEnvelope();
 
+    //z=0 of ECAM is z=0 of Atlas
+    //z=0 of moth_phys is at + LAr_z_max/2.-Cryo_z0 in atlas frame
 
+    double Zcd = -LAr_z_max/2.+Cryo_z0;
 
-
-
-
-
-
-
-
+    /*#ifdef DEBUG_GEO
+    std::cout << " " << std::endl;
+    std::cout << " Position ECAM volume in mother LAr at z " << Zcd << std::endl;
+    #endif*/
+    G4VPhysicalVolume* barrelPosPhysical =
+         new G4PVPlacement(0,                          // Rotation matrix
+                           G4ThreeVector(0.,0.,Zcd),   // Translation
+                           barrelPosEnvelope->GetName(),     // Name
+                           barrelPosEnvelope,          // Logical volume
+                           moth_phys,                  // Mother volume
+                           false,                      // Boolean volume?
+                           0);                         // Copy number
+    
+    //#endif
 
     return Em_log;
 }
