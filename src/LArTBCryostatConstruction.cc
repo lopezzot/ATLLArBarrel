@@ -167,7 +167,7 @@ G4LogicalVolume* LArTBCryostatConstruction::GetEnvelope() {
     G4double  Cryo_Rmin_W =  Cryo_Rmax_W - DeltaR_warm;
 
     // recompute vacuum space cryoastat before calo
-    G4double  DeltaR_vac = Cryo_Rmin_W - Cryo_Rmax_C;     
+    //G4double  DeltaR_vac = Cryo_Rmin_W - Cryo_Rmax_C; //unused variable rm lorenzo  
 
     G4double  Rmin_mother = Cryo_Xcent-Cryo_Rmax_W;
     G4double  Rmax_mother = 2270.;
@@ -759,11 +759,12 @@ G4LogicalVolume* LArTBCryostatConstruction::GetEnvelope() {
     // ------------------------------------------------------------------------
     //#ifdef BUILD_PRESAMPLER
 
-    LArBarrelPresamplerConstruction * ps = new LArBarrelPresamplerConstruction(1);
+    //atlas uses "ps", changed to PreSampler to avoid redefinition of CLHEP::ps lorenzo
+    LArBarrelPresamplerConstruction * PreSampler = new LArBarrelPresamplerConstruction(1);
     //g4vis->AddConsultant( new LArBarrelPresamplerVisualConsultant() );
     //g4sdc->AddConsultant( new LArBarrelPresamplerSDConsultant() );
 
-    G4LogicalVolume* barrelPSEnvelope = ps->GetEnvelope();
+    G4LogicalVolume* barrelPSEnvelope = PreSampler->GetEnvelope();
 
     // PS lenght = 2*1582.5
     // start should be a z=0 in Atlas  => z = -LAr_z_max/2.+Cryo_z0 in moth_phys
