@@ -34,6 +34,7 @@ LArTBCryostatConstruction::~LArTBCryostatConstruction(){}
 
 G4LogicalVolume* LArTBCryostatConstruction::GetEnvelope() {
 
+    G4cout<<"->in LArTBCryostatConstruction::GetEnvelope()"<<G4endl;
     G4String name,symbol;
     G4double a,z,density,fractionmass;
     G4double X0,IntL;
@@ -131,6 +132,7 @@ G4LogicalVolume* LArTBCryostatConstruction::GetEnvelope() {
                                           -25.*deg,50.*deg,3,zp,ri,ro);
     G4LogicalVolume* Em_log = new G4LogicalVolume(Em_pcone,Air,
                                     "LAr::TBBarrel::Cryostat::Envelope");
+    //Em_log is returned by GetEnvelope() method
     //g4sdc->SetSD(Em_log);                                              
      
     //
@@ -726,7 +728,7 @@ G4LogicalVolume* LArTBCryostatConstruction::GetEnvelope() {
     //g4vis->AddConsultant( new LArBarrelVisualConsultant() );
     //g4sdc->AddConsultant( new LArBarrelSDConsultant() );
 
-    G4cout << "before GetEnvelope barrel " << G4endl;
+    G4cout << "->before GetEnvelope barrel " << G4endl;
 
     G4LogicalVolume* barrelPosEnvelope = barrel->GetEnvelope();
 

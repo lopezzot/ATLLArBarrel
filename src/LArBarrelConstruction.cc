@@ -443,7 +443,8 @@ G4LogicalVolume* LArBarrelConstruction::GetEnvelope() {
     // WARNING : for the time being those two parameters don't exist in NOVA
     G4double Moth_Phi_Min = 0.0*deg; 
           //LArBarrelCalculator::s_phiMinBarrel * CLHEP::deg;//0.0 * deg;
-    G4double Moth_Phi_Max = 30*deg; //from MySqlEMB.cxx this number is set to 360deg i.e. 4pi -> to be changed
+    G4double Moth_Phi_Max = 24*deg; //from MySqlEMB.cxx this number is set to 360deg i.e. 4pi -> to be changed
+                                    //correction ad hoc by lorenzo pezzotti
            //m_parameters->GetValue("LArEMBphiMaxBarrel")*CLHEP::deg;
     /*#ifdef DEBUG_GEO
     std::cout << "phi0 and Dphi " << Moth_Phi_Min
@@ -973,39 +974,6 @@ G4LogicalVolume* LArBarrelConstruction::GetEnvelope() {
 
     #endif // BUILD_BACK_G10
     
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
