@@ -519,9 +519,9 @@ G4LogicalVolume* LArBarrelConstruction::GetEnvelope() {
     //Take values directly from atlas db, no for loop
     //
     double Rhocen_tmp[15] = {150.002*cm,152.1*cm,155.966*cm,159.72*cm,163.457*cm,167.102*cm,170.743*cm,174.307*cm,177.876*cm,181.375*cm,184.887*cm,188.336*cm,191.802*cm,195.21*cm,197.048*cm};
-    double Phicen_tmp[15] = {0.106187*deg,0.569751*deg,0.573092*deg,0.576518*deg,0.579943*deg,0.582296*deg,0.585638*deg,0.588207*deg,0.590596*deg,0.59285*deg,0.595587*deg,0.59744*deg,0.599714*deg,0.601911*deg,0.0811661*deg};
-    double Delta_tmp[15] = {6.2025*deg,45.0574*deg,43.3446*deg,42.4478*deg,40.9436*deg,40.2251*deg,38.8752*deg,38.2915*deg,37.0608*deg,36.5831*deg,35.4475*deg,35.0556*deg,33.9977*deg,33.6767*deg,90*deg};
-    double deltay_tmp[15] = {0.*cm,0.017*cm,0.03*cm,0.063*cm,0.078*cm,0.106*cm,0.109*cm,0.121*cm,0.107*cm,0.103*cm,	0.074*cm,0.061*cm,0.027*cm,0.02*cm,0.*cm};
+    double Phicen_tmp[15] = {0.106187*deg,0.569751*deg,-0.573092*deg,0.576518*deg,-0.579943*deg,0.582296*deg,-0.585638*deg,0.588207*deg,-0.590596*deg,0.59285*deg,-0.595587*deg,0.59744*deg,-0.599714*deg,0.601911*deg,0.0811661*deg};
+    double Delta_tmp[15] = {46.2025*deg,45.0574*deg,43.3446*deg,42.4478*deg,40.9436*deg,40.2251*deg,38.8752*deg,38.2915*deg,37.0608*deg,36.5831*deg,35.4475*deg,35.0556*deg,33.9977*deg,33.6767*deg,90.*deg};
+    double deltay_tmp[15] = {0.*cm,0.017*cm,0.03*cm,0.063*cm,0.078*cm,0.106*cm,0.109*cm,0.121*cm,0.107*cm,0.103*cm,0.074*cm,0.061*cm,0.027*cm,0.02*cm,0.*cm};
     for (G4int idat = 0; idat < 15 ; idat++) {
         //Rhocen[idat] = (double) (m_parameters->GetValue("LArEMBRadiusAtCurvature",idat));
         Rhocen[idat] = Rhocen_tmp[idat];

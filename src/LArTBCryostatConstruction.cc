@@ -779,14 +779,14 @@ G4LogicalVolume* LArTBCryostatConstruction::GetEnvelope() {
     //std::cout << " Position PS volume in mother LAr at z " << Zcd << std::endl;
     //#endif
 
-    G4VPhysicalVolume * barrelPSPhysical =
+    /*G4VPhysicalVolume * barrelPSPhysical =
         new G4PVPlacement(0,
                          G4ThreeVector(0.,0.,Zcd),
                          barrelPSEnvelope->GetName(),
                          barrelPSEnvelope,
                          moth_phys,
                          false,
-                         0);
+                         0);*/
     //#endif
 
     return Em_log;
