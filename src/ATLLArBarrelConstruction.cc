@@ -16,6 +16,7 @@
 #include "G4LogicalVolume.hh"
 #include "G4PVPlacement.hh"
 #include "G4VisAttributes.hh"
+#include "G4GeomTestVolume.hh"
 
 //Includers from project files
 //
@@ -79,6 +80,12 @@ G4VPhysicalVolume* ATLLArBarrelConstruction::Construct(){
                                                                 false,
                                                                 0);
     tbcryostatmotherLog->SetVisAttributes( G4VisAttributes::GetInvisible() );
+
+    //Check overlaps of experimentalHall_phys
+    //(volume, tolerance, npoints, verbosity)
+    //
+    G4GeomTestVolume* testVolume = new G4GeomTestVolume(experimentalHall_phys, 0.0, 1000, true);
+    testVolume->TestOverlapInTree();
 
     return experimentalHall_phys;
 
