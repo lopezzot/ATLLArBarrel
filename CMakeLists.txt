@@ -50,6 +50,7 @@ set(ATLLArBarrel_SCRIPT
   init_vis.mac
   vis.mac
   icons.mac
+  run.mac
   )
 
 foreach(_script ${ATLLArBarrel_SCRIPT})
