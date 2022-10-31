@@ -84,9 +84,8 @@ G4VPhysicalVolume* ATLLArBarrelConstruction::Construct(){
     //Check overlaps of experimentalHall_phys
     //(volume, tolerance, npoints, verbosity)
     //
-    G4cout<<"HEREEEEEE"<<G4endl;
-    G4GeomTestVolume* testVolume = new G4GeomTestVolume(experimentalHall_phys, 0.0, 1000, true);
-    testVolume->TestOverlapInTree();
+    //G4GeomTestVolume* testVolume = new G4GeomTestVolume(experimentalHall_phys, 0.0, 1000, true);
+    //testVolume->TestOverlapInTree();
 
     return experimentalHall_phys;
 
