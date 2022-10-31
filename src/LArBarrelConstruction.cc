@@ -44,7 +44,7 @@
 
 
 LArBarrelConstruction::LArBarrelConstruction()
-    : A_SAGGING(true),
+    : A_SAGGING(false),
       IflCur(false),
       IflMapTrans(true) {}
 
