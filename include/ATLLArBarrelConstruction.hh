@@ -22,6 +22,9 @@ class ATLLArBarrelConstruction : public G4VUserDetectorConstruction {
 
         virtual G4VPhysicalVolume* Construct();
         virtual void ConstructSDandField();
+    
+    private:
+        G4bool fDumpGDML;
 
 };
 

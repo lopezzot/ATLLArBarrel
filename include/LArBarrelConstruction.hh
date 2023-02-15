@@ -81,7 +81,6 @@ class LArBarrelConstruction{
 			const G4double Ceny[] ) const;
 
         inline double dely( const double gamfirstabs, double G ) const;
-
 };
 
 G4double LArBarrelConstruction::fx( G4double r, G4double G, const G4double Cenx[], const G4double Ceny[] ) const 
@@ -104,4 +103,3 @@ G4double LArBarrelConstruction::dely( const G4double Gama0, G4double G ) const
 #endif //LArBarrelConstruction_h 1
 
 //**************************************************
-

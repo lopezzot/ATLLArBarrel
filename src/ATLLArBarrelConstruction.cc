@@ -17,13 +17,16 @@
 #include "G4PVPlacement.hh"
 #include "G4VisAttributes.hh"
 #include "G4GeomTestVolume.hh"
+#include "G4GDMLParser.hh"
 
 //Includers from project files
 //
 #include "ATLLArBarrelConstruction.hh"
 #include "LArTBCryostatConstruction.hh"
 
-ATLLArBarrelConstruction::ATLLArBarrelConstruction(){};
+ATLLArBarrelConstruction::ATLLArBarrelConstruction()
+    : G4VUserDetectorConstruction(),
+      fDumpGDML(true){};
 
 ATLLArBarrelConstruction::~ATLLArBarrelConstruction(){};
 
@@ -86,7 +89,16 @@ G4VPhysicalVolume* ATLLArBarrelConstruction::Construct(){
     //
     //G4GeomTestVolume* testVolume = new G4GeomTestVolume(experimentalHall_phys, 0.0, 1000, true);
     //testVolume->TestOverlapInTree();
+    
+    //Dump GDML file with experimentalHall_phys
+    //
+    if(fDumpGDML){
+        G4GDMLParser Parser;
+        Parser.Write("experimentalHall.gdml", experimentalHall_phys);
+    }
 
+    //Return experimentalHall_phys
+    //
     return experimentalHall_phys;
 
 }
