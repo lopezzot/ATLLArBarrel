@@ -26,7 +26,7 @@
 
 ATLLArBarrelConstruction::ATLLArBarrelConstruction()
     : G4VUserDetectorConstruction(),
-      fDumpGDML(true){};
+      fDumpGDML(false){};
 
 ATLLArBarrelConstruction::~ATLLArBarrelConstruction(){};
 
