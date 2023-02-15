@@ -23,10 +23,10 @@ void ATLLArBarrelRunAction::EndOfRunAction(const G4Run* aRun){
     fTimer.Stop();
     
     G4int events = aRun->GetNumberOfEvent();
-    G4cout << " ============================================================================== " << G4endl;
+    G4cout << " ====================================================================== " << G4endl;
     G4cout << "  Run terminated, " << events << " events transported" << G4endl;
     G4cout << "  Time: " << fTimer << G4endl;
-    G4cout << " ============================================================================== " << G4endl;
+    G4cout << " ====================================================================== " << G4endl;
 }
 
 //**************************************************
