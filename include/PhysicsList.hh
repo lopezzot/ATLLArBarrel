@@ -23,8 +23,11 @@ class PhysicsList: public G4VModularPhysicsList {
 
     public:
 
-        PhysicsList();
+        PhysicsList(const G4String& G4HepEmType);
         ~PhysicsList();
+    
+    private:
+        G4String fG4HepEmType;
 
 };
 

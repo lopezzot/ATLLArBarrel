@@ -29,6 +29,15 @@ if(WITH_G4HepEm)
 endif()
 
 #----------------------------------------------------------------------------
+# Option to enable G4HepEm specialized trasnportation usage
+#
+option(WITH_G4HepEmTracking "Build for G4HepEm usage with tracking" OFF)
+if(WITH_G4HepEmTracking)
+    add_compile_definitions(USE_G4HepEmTracking)
+    message("Project CMAKE option: building with USE_G4HepEm with tracking")
+endif()
+
+#----------------------------------------------------------------------------
 # Setup Geant4 include directories and compile definitions
 # Setup include directory for this project
 #

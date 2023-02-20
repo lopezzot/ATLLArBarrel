@@ -108,9 +108,16 @@ int main(int argc,char** argv) {
     auto physListFactory = new G4PhysListFactory();
     auto physicsList = physListFactory->GetReferencePhysList( custom_pl );
     runManager->SetUserInitialization(physicsList);
+    #endif
+
+    #ifdef USE_G4HepEm
+    #ifdef USE_G4HepEmTracking              //use G4HepEm with specialized tracking
+    G4cout<<"--> Using G4HepEm with specialized tracking"<<G4endl;
+    runManager->SetUserInitialization( new PhysicsList("G4HepEmTracking") );
     #else
-    G4cout<<"--> Using G4HepEm"<<G4endl;
-    runManager->SetUserInitialization( new PhysicsList );
+    G4cout<<"--> Using G4HepEm"<<G4endl;    //use G4HepEm 
+    runManager->SetUserInitialization( new PhysicsList("G4HepEm") );
+    #endif
     #endif 
  
     //Geometry and ActionInitialization
