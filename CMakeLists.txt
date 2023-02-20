@@ -24,8 +24,8 @@ endif()
 option(WITH_G4HepEm "Build for G4HepEm usage" OFF)
 if(WITH_G4HepEm)
     find_package(G4HepEm REQUIRED)
-    add_compile_definitions(USE_G4HepEM)
-    message("Project CMAKE option: building with USE_G4HepEM=ON")
+    add_compile_definitions(USE_G4HepEm)
+    message("Project CMAKE option: building with USE_G4HepEm")
 endif()
 
 #----------------------------------------------------------------------------
@@ -47,7 +47,7 @@ file(GLOB headers ${PROJECT_SOURCE_DIR}/include/*.hh)
 # Add the executable, and link it to the Geant4 libraries
 #
 add_executable(ATLLArBarrel ATLLArBarrel.cc ${sources} ${headers})
-target_link_libraries(ATLLArBarrel ${Geant4_LIBRARIES})
+target_link_libraries(ATLLArBarrel ${Geant4_LIBRARIES} ${G4HepEm_LIBRARIES})
 
 #----------------------------------------------------------------------------
 # Copy all scripts to the build directory, i.e. the directory in which we
@@ -61,6 +61,7 @@ set(ATLLArBarrel_SCRIPT
   vis.mac
   icons.mac
   run.mac
+  single.mac
   )
 
 foreach(_script ${ATLLArBarrel_SCRIPT})

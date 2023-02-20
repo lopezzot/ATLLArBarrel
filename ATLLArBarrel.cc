@@ -26,6 +26,10 @@
 #include "G4UIExecutive.hh"
 #include "G4UIcommand.hh"
 
+#ifdef USE_G4HepEm
+#include "PhysicsList.hh"
+#endif
+
 //Output helpers
 //
 namespace CLIOutputs {
@@ -93,15 +97,27 @@ int main(int argc,char** argv) {
     #else
     auto runManager = new G4RunManager;
     #endif
-    
+ 
     //Manadatory Geant4 classes
     //
+
+    //Physics List
+    //
+    #ifndef USE_G4HepEm //Use Geant4 reference physics lists
+    G4cout<<"--> Using Geant4 reference physics list"<<G4endl;
     auto physListFactory = new G4PhysListFactory();
     auto physicsList = physListFactory->GetReferencePhysList( custom_pl );
     runManager->SetUserInitialization(physicsList);
+    #else
+    G4cout<<"--> Using G4HepEm"<<G4endl;
+    runManager->SetUserInitialization( new PhysicsList );
+    #endif 
+ 
+    //Geometry and ActionInitialization
+    //
     runManager->SetUserInitialization(new ATLLArBarrelConstruction());
     runManager->SetUserInitialization(new ATLLArBarrelActIni());
-    
+
     //Visualization manager construction
     //
     auto visManager = new G4VisExecutive;
