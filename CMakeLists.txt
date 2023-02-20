@@ -19,6 +19,16 @@ else()
 endif()
 
 #----------------------------------------------------------------------------
+# Option to enable G4HepEm usage
+#
+option(WITH_G4HepEm "Build for G4HepEm usage" OFF)
+if(WITH_G4HepEm)
+    find_package(G4HepEm REQUIRED)
+    add_compile_definitions(USE_G4HepEM)
+    message("Project CMAKE option: building with USE_G4HepEM=ON")
+endif()
+
+#----------------------------------------------------------------------------
 # Setup Geant4 include directories and compile definitions
 # Setup include directory for this project
 #
