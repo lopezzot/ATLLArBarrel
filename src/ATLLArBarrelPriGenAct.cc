@@ -29,9 +29,9 @@ ATLLArBarrelPriGenAct::ATLLArBarrelPriGenAct()
       //
       auto particleDefinition = G4ParticleTable::GetParticleTable()->FindParticle( "e-" );
       fParticleGun->SetParticleDefinition( particleDefinition );
-      fParticleGun->SetParticleMomentumDirection( G4ThreeVector( 0.,0.,1. ) );
+      fParticleGun->SetParticleMomentumDirection( G4ThreeVector( 1.,0.,0. ) );
       fParticleGun->SetParticleEnergy( 1.*GeV );
-      fParticleGun->SetParticlePosition( G4ThreeVector( 0.,0.,0. ) );
+      fParticleGun->SetParticlePosition( G4ThreeVector( 0.,0.,3.5*m ) );
 }
 
 ATLLArBarrelPriGenAct::~ATLLArBarrelPriGenAct() {
