@@ -11,7 +11,7 @@
 
 //Includers from project files
 //
-#include "PhysListHepEm.hh"
+#include "../include/hepemlib/PhysListHepEm.hh"
 
 // include the G4HepEmProcess from the G4HepEm lib.
 //

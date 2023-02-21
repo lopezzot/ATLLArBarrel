@@ -9,9 +9,9 @@
 
 //Includers from project files
 //
-#include "PhysicsList.hh" 
-#include "PhysListHepEm.hh"
-#include "PhysListHepEmTracking.hh"
+#include "../include/hepemlib/PhysicsList.hh"
+#include "../include/hepemlib/PhysListHepEm.hh"
+#include "../include/hepemlib/PhysListHepEmTracking.hh"
 
 //Includers from Geant4
 //

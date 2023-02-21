@@ -26,6 +26,7 @@ if(WITH_G4HepEm)
     find_package(G4HepEm REQUIRED)
     add_compile_definitions(USE_G4HepEm)
     message("Project CMAKE option: building with USE_G4HepEm")
+    add_subdirectory(hepemlib)
 endif()
 
 #----------------------------------------------------------------------------
@@ -56,11 +57,15 @@ file(GLOB headers ${PROJECT_SOURCE_DIR}/include/*.hh)
 # Add the executable, and link it to the Geant4 libraries
 #
 add_executable(ATLLArBarrel ATLLArBarrel.cc ${sources} ${headers})
-target_link_libraries(ATLLArBarrel ${Geant4_LIBRARIES} ${G4HepEm_LIBRARIES})
+if(WITH_G4HepEm)
+    target_link_libraries(ATLLArBarrel ${Geant4_LIBRARIES} ${G4HepEm_LIBRARIES} hepemlib)
+else()
+    target_link_libraries(ATLLArBarrel ${Geant4_LIBRARIES} ${G4HepEm_LIBRARIES})
+endif()
 
 #----------------------------------------------------------------------------
 # Copy all scripts to the build directory, i.e. the directory in which we
-# build B5. This is so that we can run the executable directly because it
+# build. This is so that we can run the executable directly because it
 # relies on these scripts being in the current working directory.
 #
 set(ATLLArBarrel_SCRIPT
