@@ -27,7 +27,7 @@
 #include "G4UIcommand.hh"
 
 #ifdef USE_G4HepEm
-#include <hepemlib/PhysicsList.hh>
+#include "PhysicsList.hh" //it is built as a separate library in hepem
 #endif
 
 //Output helpers

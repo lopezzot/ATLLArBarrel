@@ -7,11 +7,11 @@
 // \start date: 20 February 2023
 //**************************************************
 
-//Includers from project files
+//Includers from hepemlib files
 //
-#include "../include/hepemlib/PhysicsList.hh"
-#include "../include/hepemlib/PhysListHepEm.hh"
-#include "../include/hepemlib/PhysListHepEmTracking.hh"
+#include "PhysicsList.hh"
+#include "PhysListHepEm.hh"
+#include "PhysListHepEmTracking.hh"
 
 //Includers from Geant4
 //

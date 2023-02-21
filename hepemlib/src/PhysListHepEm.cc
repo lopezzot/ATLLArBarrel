@@ -9,9 +9,9 @@
 // \start date: 20 February 2023
 //**************************************************
 
-//Includers from project files
+//Includers from hepemlib files
 //
-#include "../include/hepemlib/PhysListHepEm.hh"
+#include "PhysListHepEm.hh"
 
 // include the G4HepEmProcess from the G4HepEm lib.
 //

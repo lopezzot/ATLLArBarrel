@@ -1,7 +1,7 @@
 add_library(hepemlib
-    include/hepemlib/PhysicsList.hh
-    include/hepemlib/PhysListHepEm.hh
-    include/hepemlib/PhysListHepEmTracking.hh
+    include/PhysicsList.hh
+    include/PhysListHepEm.hh
+    include/PhysListHepEmTracking.hh
     src/PhysicsList.cc
     src/PhysListHepEm.cc
     src/PhysListHepEmTracking.cc
