@@ -14,6 +14,7 @@ A Geant4 simulation of the ATLAS LAr Barrel beam test setup.
         <li><a href="#build-compile-and-execute-on-lxplus">Build, compile and execute on lxplus</a></li>
       </ul>
     </li>
+    <li><a href="#g4hepem-integration">G4HepEm integration</a></li>
   </ol>
 </details>
 
@@ -74,4 +75,29 @@ Parser options
 3. execute (example with TBrun.mac macro card, 2 threads and FTFP_BERT physics list)
    ```sh
    ./ATLLArBarrel -m run.mac -t 2 -p FTFP_BERT
+   ```
+
+<!--G4HepEm integration-->
+## G4HepEm integration
+
+[G4HepEm](https://github.com/mnovak42/g4hepem) is a project from the Geant4 Collaboration targeting a library for speeding up the electromagnetic shower generation.
+G4HepEm is an optional dependency to ATLLarBarrel. The following are istructions for its usage:
+1. Install G4HepEm as described in the [documentation](https://github.com/mnovak42/g4hepem#quick-start)
+2. source geant4 env (example with Geant4-11.1)
+   ```sh
+   source /path-to/geant4-11.1.0/geant4-11.1.0-install/bin/geant4.sh 
+    ```
+3. Build and compile with G4HepEm
+   ```sh
+   cmake -DGeant4_DIR=/path-to/geant4-11.1.0/geant4-11.1.0-install/lib/Geant4-11.1.0/ -DG4HepEm_DIR=/path-to/g4hepem-install/lib/cmake/G4HepEm/ -DWITH_G4HepEm=ON ../ATLLArBarrel/
+   make
+   ```
+4. Execute (example with run.mac macro, 2 threads and FTFP_BERT physics list)
+   ```sh
+   ./ATLLArBarrel -m run.mac -t 2 -p FTFP_BERT
+   ```
+   
+Note: the `-DWITH_G4HepEm=ON` will compile the files under `hepemlib/` that are needed to register the `G4HepEmProcess`. It is possible to use the `G4HepEmTrackingManager` instead of the `G4HepEmProcess` using the CMAKE option `-DWITH_G4HepEmTracking=OFF`.
+   ```sh
+   cmake -DGeant4_DIR=/path-to/geant4-11.1.0/geant4-11.1.0-install/lib/Geant4-11.1.0/ -DG4HepEm_DIR=/path-to/g4hepem-install/lib/cmake/G4HepEm/ -DWITH_G4HepEm=ON -DWITH_G4HepEmTracking=OFF ../ATLLArBarrel/ 
    ```
