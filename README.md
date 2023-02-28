@@ -122,6 +122,7 @@ Note: the `-DWITH_G4HepEm=ON` will compile the files under `hepemlib/` that are 
    make install
    ```
 3. Build ATLLArBarrel
+   ```sh
    git clone https://github.com/lopezzot/ATLLArBarrel.git
    source /path_to/installg4vecgeom/bin/geant4.sh
    mkdir build; cd build/
