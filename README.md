@@ -126,6 +126,6 @@ Note: the `-DWITH_G4HepEm=ON` will compile the files under `hepemlib/` that are 
    git clone https://github.com/lopezzot/ATLLArBarrel.git
    source /path_to/installg4vecgeom/bin/geant4.sh
    mkdir build; cd build/
-   cmake -DGeant4_DIR=/absolute-path_to/installg4vecgeom/lib/Geant4-11.1.0/ -DVecGeom_DIR=/abolute-path-to/VecGeom-v1.2.1/install/lib/cmake/VecGeom relative_path_to/ATLLarBarrel/
+   cmake -DGeant4_DIR=/absolute-path_to/installg4vecgeom/lib/Geant4-11.1.0/ -DVecGeom_DIR=/abolute-path-to/VecGeom-v1.2.1/install/lib/cmake/VecGeom /relative_path_to/ATLLarBarrel/
    make
    ```
