@@ -15,6 +15,7 @@ A Geant4 simulation of the ATLAS LAr Barrel beam test setup.
       </ul>
     </li>
     <li><a href="#g4hepem-integration">G4HepEm integration</a></li>
+    <li><a href="#using-vecgeom">Using VecGeom</a></li>
   </ol>
 </details>
 
@@ -44,10 +45,9 @@ The project targets a standalone Geant4 simulation of the ATLAS LAr Barrel test 
 3.  cmake build directory and make (using geant4.11.1)
     ```sh
     mkdir build; cd build/
-    cmake -DGeant4_DIR=/absolute_path_to/geant4.11.1-install/lib/Geant4-11.1/ relative_path_to/ATLLarBarrel/
+    cmake -DGeant4_DIR=/absolute_path_to/geant4.11.1-install/lib/Geant4-11.1.0/ relative_path_to/ATLLarBarrel/
     make
     ```
-    See CMake options for all build options
 4.  execute (example with run.mac macro card, 2 threads and FTFP_BERT physics list)
     ```sh
     ./ATLLarBarrel -m run.mac -t 2 -p FTFP_BERT
@@ -99,5 +99,32 @@ G4HepEm is an optional dependency to ATLLarBarrel. The following are istructions
    
 Note: the `-DWITH_G4HepEm=ON` will compile the files under `hepemlib/` that are needed to register the `G4HepEmProcess`. It is possible to use the `G4HepEmTrackingManager` instead of the `G4HepEmProcess` using the CMAKE option `-DWITH_G4HepEmTracking=OFF`.
    ```sh
-   cmake -DGeant4_DIR=/path-to/geant4-11.1.0/geant4-11.1.0-install/lib/Geant4-11.1.0/ -DG4HepEm_DIR=/path-to/g4hepem-install/lib/cmake/G4HepEm/ -DWITH_G4HepEm=ON -DWITH_G4HepEmTracking=OFF ../ATLLArBarrel/ 
+   cmake -DGeant4_DIR=/path-to/geant4-11.1.0/geant4-11.1.0-install/lib/Geant4-11.1.0/ -DG4HepEm_DIR=/path-to/g4hepem-install/lib/cmake/G4HepEm/ -DWITH_G4HepEm=ON -DWITH_G4HepEmTracking=ON ../ATLLArBarrel/ 
+   ```
+
+<!--Using VecGeom-->
+## Using VecGeom
+
+[VecGeom](https://gitlab.cern.ch/VecGeom/VecGeom) is a geometry modeller library and optional dependency to Geant4. ATLLArBarrel can be used with VecGeom. The following are my instructions for its usage:
+1. Install VecGeom (example with VecGeom-v1.2.1)
+   ```sh
+   cd VecGeom-v1.2.1/
+   mkdir build; cd build
+   cmake -DCMAKE_INSTALL_PREFIX=/absolute-path-to/VecGeom-v1.2.1/install/ -DVECGEOM_BUILTIN_VECCORE=ON ..
+   cmake --build .
+   cmake --build . --target install
+   ```
+2. Install Geant4 with VecGeom dependency (example with geant4-11.1.0)
+   ```sh
+   mkdir buildg4vecgeom; cd buildg4vecgeom
+   cmake -DCMAKE_INSTALL_PREFIX=/abolute-path-to/installg4vecgeom -DGEANT4_INSTALL_DATA=ON -DGEANT4_USE_QT=ON -DGEANT4_BUILD_MULTITHREADED=ON -DGEANT4_USE_USOLIDS=ON -DVecGeom_DIR=/abolute-path-to/VecGeom-v1.2.1/install/lib/cmake/VecGeom/ -DGEANT4_USE_GDML=ON /relative-path-to/geant4-11.1.0/
+   make -jN
+   make install
+   ```
+3. Build ATLLArBarrel
+   git clone https://github.com/lopezzot/ATLLArBarrel.git
+   source /path_to/installg4vecgeom/bin/geant4.sh
+   mkdir build; cd build/
+   cmake -DGeant4_DIR=/absolute-path_to/installg4vecgeom/lib/Geant4-11.1.0/ -DVecGeom_DIR=/abolute-path-to/VecGeom-v1.2.1/install/lib/cmake/VecGeom        relative_path_to/ATLLarBarrel/
+   make
    ```
