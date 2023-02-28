@@ -105,7 +105,7 @@ Note: the `-DWITH_G4HepEm=ON` will compile the files under `hepemlib/` that are 
 <!--Using VecGeom-->
 ## Using VecGeom
 
-[VecGeom](https://gitlab.cern.ch/VecGeom/VecGeom) is a geometry modeller library and optional dependency to Geant4. ATLLArBarrel can be used with VecGeom. The following are my instructions for its usage:
+[VecGeom](https://gitlab.cern.ch/VecGeom/VecGeom) is a geometry modeller library and optional dependency to Geant4. ATLLArBarrel can be used with VecGeom. The following are my instructions for VecGeom usage:
 1. Install VecGeom (example with VecGeom-v1.2.1)
    ```sh
    cd VecGeom-v1.2.1/
@@ -126,6 +126,6 @@ Note: the `-DWITH_G4HepEm=ON` will compile the files under `hepemlib/` that are 
    git clone https://github.com/lopezzot/ATLLArBarrel.git
    source /path_to/installg4vecgeom/bin/geant4.sh
    mkdir build; cd build/
-   cmake -DGeant4_DIR=/absolute-path_to/installg4vecgeom/lib/Geant4-11.1.0/ -DVecGeom_DIR=/abolute-path-to/VecGeom-v1.2.1/install/lib/cmake/VecGeom        relative_path_to/ATLLarBarrel/
+   cmake -DGeant4_DIR=/absolute-path_to/installg4vecgeom/lib/Geant4-11.1.0/ -DVecGeom_DIR=/abolute-path-to/VecGeom-v1.2.1/install/lib/cmake/VecGeom relative_path_to/ATLLarBarrel/
    make
    ```
