@@ -3,7 +3,7 @@ A Geant4 simulation of the ATLAS LAr Barrel beam test setup.
 
 <figure>
 <img src="./images/ATLLArBarrel_img1.png" alt="Trulli" style="width:100%">
-<figcaption align="center"><b>Fig. - 10 GeV electron passing through the geometry setup.</b></figcaption>
+<figcaption align="center"><b>Fig. - 100 GeV electron passing through the geometry setup.</b></figcaption>
 </figure>
 <br/><br/>
 
