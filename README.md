@@ -120,7 +120,6 @@ Note: the `-DWITH_G4HepEm=ON` will compile the files under `hepemlib/` that are 
    cmake --build .
    cmake --build . --target install
    ```
-   To build VecGeom in vectore mode add  `-DVECGEOM_BACKENDS="vc"`
 2. Install Geant4 with VecGeom dependency (example with geant4-11.1.0)
    ```sh
    mkdir buildg4vecgeom; cd buildg4vecgeom
