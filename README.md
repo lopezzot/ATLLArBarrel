@@ -103,7 +103,7 @@ G4HepEm is an optional dependency to ATLLarBarrel. The following are istructions
    ./ATLLArBarrel -m run.mac -t 2 -p FTFP_BERT
    ```
    
-Note: the `-DWITH_G4HepEm=ON` will compile the files under `hepemlib/` that are needed to register the `G4HepEmProcess`. It is possible to use the `G4HepEmTrackingManager` instead of the `G4HepEmProcess` using the CMAKE option `-DWITH_G4HepEmTracking=OFF`.
+Note: the `-DWITH_G4HepEm=ON` will compile the files under `hepemlib/` that are needed to register the `G4HepEmProcess`. It is possible to use the `G4HepEmTrackingManager` instead of the `G4HepEmProcess` using the CMAKE option `-DWITH_G4HepEmTracking=ON`.
    ```sh
    cmake -DGeant4_DIR=/path-to/geant4-11.1.0/geant4-11.1.0-install/lib/Geant4-11.1.0/ -DG4HepEm_DIR=/path-to/g4hepem-install/lib/cmake/G4HepEm/ -DWITH_G4HepEm=ON -DWITH_G4HepEmTracking=ON ../ATLLArBarrel/ 
    ```
