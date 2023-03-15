@@ -42,6 +42,10 @@
 #define BUILD_STAC
 #define BUILD_ACCORDION_PLATES
 
+// Define this macro to use the original geometry construction, taken from
+// ATLAS. For example, this creates all "Straight" volumes as G4Traps, even
+// though many of them can actually be created as G4Box.
+//#define ORIGINAL_ATLAS
 
 LArBarrelConstruction::LArBarrelConstruction()
     : A_SAGGING(false),
@@ -1211,12 +1215,9 @@ G4LogicalVolume* LArBarrelConstruction::GetEnvelope() {
         G4Tubs *Cornupt_ptub;
         G4Tubs *Cornup_etub;
         G4Tubs *Corndw_etub;
-        G4Trap *Straight_trap;
-        G4Trap *Straight_trapt;
-        G4Trap *Straight_etrap;
-        G4Trd *Straight_trd;
-        G4Trd *Straight_trdt;
-        G4Trd *Straight_etrd;
+        G4VSolid *Straight_solid;
+        G4VSolid *Straight_solidt;
+        G4VSolid *Straight_esolid;
         G4Box *Frtbck_box;
         G4Box *Frtbck2_box;
         G4Box *Frtbcke_box;
@@ -1896,11 +1897,16 @@ G4LogicalVolume* LArBarrelConstruction::GetEnvelope() {
                    << " " << tl1 << " " << bl1 << std::endl;
         }
         #endif
-	Straight_trap = new G4Trap(straightName, 
-				       2*Dz, 
-				       2*h1, 
-				       2*tl1, 
-				       2*bl1);
+#ifndef ORIGINAL_ATLAS
+	if (tl1 == bl1) {
+		Straight_solid = new G4Box(straightName, tl1, h1, Dz);
+	} else
+#endif
+		Straight_solid = new G4Trap(straightName,
+					    2*Dz,
+					    2*h1,
+					    2*tl1,
+					    2*bl1);
 
         // The same for electrodes.
         if(A_SAGGING) h1 = de/2. - .007*CLHEP::mm;
@@ -1913,21 +1919,26 @@ G4LogicalVolume* LArBarrelConstruction::GetEnvelope() {
                    << " " << tl1 << " " << bl1 << std::endl;
         }
         #endif
-	Straight_etrap = new G4Trap(straighteName, 
-					2*Dze, 
-					2*h1, 
-					2*tl1, 
-					2*bl1);
+#ifndef ORIGINAL_ATLAS
+	if (tl1 == bl1) {
+		Straight_esolid = new G4Box(straighteName, tl1, h1, Dze);
+	} else
+#endif
+		Straight_esolid = new G4Trap(straighteName,
+					     2*Dze,
+					     2*h1,
+					     2*tl1,
+					     2*bl1);
 
 
         // Related straight logical volumes (absorbers, electrodes)
 
 
-        Straight_log = new G4LogicalVolume(Straight_trap,
+        Straight_log = new G4LogicalVolume(Straight_solid,
 					       Thin_abs,
 					       straightName);
 
-        Straight_elog = new G4LogicalVolume(Straight_etrap,
+        Straight_elog = new G4LogicalVolume(Straight_esolid,
 						Kapton_Cu,
 						straighteName);
 
@@ -1961,13 +1972,13 @@ G4LogicalVolume* LArBarrelConstruction::GetEnvelope() {
                    << " " << Xt1 << " " << Xb1 << std::endl;
         }
         #endif
-	Straight_trapt = new G4Trap(straighttName, 
-				    2*Dz, 
-				    2*h1, 
-				    2*Xt1, 
-				    2*Xb1);
+	Straight_solidt = new G4Trap(straighttName,
+				     2*Dz,
+				     2*h1,
+				     2*Xt1,
+				     2*Xb1);
 
-	G4LogicalVolume *Straight_logt = new G4LogicalVolume(Straight_trapt,
+	G4LogicalVolume *Straight_logt = new G4LogicalVolume(Straight_solidt,
 							     Thick_abs,
 							     straighttName);
 	//g4vis->SetVis( Straight_logt,ratio,partial );
