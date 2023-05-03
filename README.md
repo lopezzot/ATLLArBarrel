@@ -13,6 +13,7 @@ A Geant4 simulation of the ATLAS LAr Barrel beam test setup.
   <ol>
     <li><a href="#project-description">Project description</a></li>
     <li><a href="#authors-and-contacts">Authors and contacts</a></li>
+    <li><a href="#authors-and-contacts">Presentations</a></li>
     <li>
       <a href="#how-to">How to</a>
       <ul>
@@ -35,6 +36,10 @@ The project targets a standalone Geant4 simulation of the ATLAS LAr Barrel test 
 ## Authors and contacts
 - 👨‍🔬 Lorenzo Pezzotti (CERN EP-SFT) - lorenzo.pezzotti@cern.ch 
 - 👨‍🔬 Supervisor: Alberto Ribon (CERN EP-SFT)
+
+<!--Presentations-->
+## Presentations
+🗣️ CERN EP-SFT Simulation Meeting 21/3/2023, [Towards a Geant4 ATLAS LAr Barrel Validation Test](https://indico.cern.ch/event/1267983/contributions/5325269/attachments/2615458/4520223/lopezzot_21_3_2023.pdf)
 
 <!--How to-->
 ## How to
