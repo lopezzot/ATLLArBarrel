@@ -45,9 +45,10 @@ G4bool ATLLArBarrelSensDet::ProcessHits(G4Step* aStep, G4TouchableHistory* th){
     //
     auto Eta = aStep->GetPreStepPoint()->GetPosition().eta();
     auto Phi = aStep->GetPreStepPoint()->GetPosition().phi();
-    //If Eta<0. or Eta>1.3 do not process hit
+    auto Edep = aStep->GetTotalEnergyDeposit();
+    //If Edep==0 or Eta<0. or Eta>1.3 do not process hit
     //
-    if(Eta<0. || Eta>1.3) return false;
+    if(Edep == 0. || Eta<0. || Eta>1.3) return false;
 
     return true;
 }
