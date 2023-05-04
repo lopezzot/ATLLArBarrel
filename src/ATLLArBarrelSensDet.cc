@@ -40,7 +40,16 @@ G4bool ATLLArBarrelSensDet::ProcessHits(G4Step* aStep, G4TouchableHistory* th){
     //G4cout<<"Particle "<< aStep->GetTrack()->GetParticleDefinition()->GetParticleName()<< " " <<
     //        "Dep(MeV) "<< aStep->GetTotalEnergyDeposit() << " " <<
     //        "Mat "     << aStep->GetPreStepPoint()->GetMaterial()->GetName() << " " << G4endl; 
+    
+    //Get hit Eta and Phi values
+    //
+    auto Eta = aStep->GetPreStepPoint()->GetPosition().eta();
+    auto Phi = aStep->GetPreStepPoint()->GetPosition().phi();
+    //If Eta<0. or Eta>1.3 do not process hit
+    //
+    if(Eta<0. || Eta>1.3) return false;
 
+    return true;
 }
 
 void ATLLArBarrelSensDet::EndOfEvent( G4HCofThisEvent* ){}
