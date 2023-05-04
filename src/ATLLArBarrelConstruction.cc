@@ -18,10 +18,13 @@
 #include "G4VisAttributes.hh"
 #include "G4GeomTestVolume.hh"
 #include "G4GDMLParser.hh"
+#include "G4SDManager.hh"
+#include "G4LogicalVolumeStore.hh"
 
 //Includers from project files
 //
 #include "ATLLArBarrelConstruction.hh"
+#include "ATLLArBarrelSensDet.hh"
 #include "LArTBCryostatConstruction.hh"
 
 ATLLArBarrelConstruction::ATLLArBarrelConstruction()
@@ -106,6 +109,23 @@ G4VPhysicalVolume* ATLLArBarrelConstruction::Construct(){
 
 }
 
-void ATLLArBarrelConstruction::ConstructSDandField(){}
+void ATLLArBarrelConstruction::ConstructSDandField(){
+
+    //Sensitive detectors
+    //
+    auto LArSD = new ATLLArBarrelSensDet("LArSD","LArHitsCollection");
+    G4SDManager::GetSDMpointer()->AddNewDetector( LArSD );
+
+    //Assign to logical volume
+    //
+    auto LVStore = G4LogicalVolumeStore::GetInstance();
+    for(auto LV : *LVStore){
+    
+        if(LV->GetName()=="LAr::TBBarrel::Cryostat::LAr") LV->SetSensitiveDetector(LArSD);
+    }
+
+    //No fields
+
+}
 
 //**************************************************

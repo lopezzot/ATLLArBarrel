@@ -27,7 +27,21 @@ ATLLArBarrelSensDet::ATLLArBarrelSensDet(const G4String& name, const G4String& h
 
 void ATLLArBarrelSensDet::Initialize(G4HCofThisEvent* hitCollection) {}
 
-G4bool ATLLArBarrelSensDet::ProcessHits(G4Step* step, G4TouchableHistory* th){}
+G4bool ATLLArBarrelSensDet::ProcessHits(G4Step* aStep, G4TouchableHistory* th){
+
+    //Print out some info step-by-step in sensitive elements
+    //
+    //G4cout<<"Track #: "<< aStep->GetTrack()->GetTrackID()<< " " <<
+    //        "Step #: " << aStep->GetTrack()->GetCurrentStepNumber()<< " "<<
+    //        "Volume: " << aStep->GetPreStepPoint()->GetTouchableHandle()->GetVolume()->GetName()<< " " << G4endl;
+    //G4cout<<"x: "<< aStep->GetPreStepPoint()->GetPosition().x() <<
+    //        "y: "<< aStep->GetPreStepPoint()->GetPosition().y() <<
+    //        "z: "<< aStep->GetPreStepPoint()->GetPosition().z() << G4endl;
+    //G4cout<<"Particle "<< aStep->GetTrack()->GetParticleDefinition()->GetParticleName()<< " " <<
+    //        "Dep(MeV) "<< aStep->GetTotalEnergyDeposit() << " " <<
+    //        "Mat "     << aStep->GetPreStepPoint()->GetMaterial()->GetName() << " " << G4endl; 
+
+}
 
 void ATLLArBarrelSensDet::EndOfEvent( G4HCofThisEvent* ){}
 
