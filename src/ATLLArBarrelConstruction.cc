@@ -76,7 +76,10 @@ G4VPhysicalVolume* ATLLArBarrelConstruction::Construct(){
     LArTBCryostatConstruction* cryostat = new LArTBCryostatConstruction();
     G4LogicalVolume* tbcryostatmotherLog = cryostat->GetEnvelope(); //Em_log
     G4VPhysicalVolume* tbcryostatmotherPhys = new G4PVPlacement(0, 
-                                                                G4ThreeVector(0.,0.,+2000.),
+                                                                //G4ThreeVector(0.,0.,+2000.), //old position
+                                                                                               //as ATLAS TB code
+                                                                G4ThreeVector(0.,0.,0.),       //new pos
+                                                                                               //calo starts at z=0
                                                                 "LAr::TBBarrel::Cryostat::MotherPhys",
                                                                 tbcryostatmotherLog,
                                                                 experimentalHall_phys,
