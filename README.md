@@ -1,5 +1,7 @@
 # ATLLArBarrel
-A Geant4 simulation of the ATLAS LAr Barrel beam test setup.
+A Geant4 simulation of the ATLAS LAr Barrel beam test setup.<br />
+<br />
+![example workflow](https://github.com/lopezzot/ATLTileCalTB/actions/workflows/geant4-test.yml/badge.svg)
 
 <figure>
 <img src="./images/ATLLArBarrel_img1.png" alt="Trulli" style="width:100%">
