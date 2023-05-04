@@ -29,9 +29,12 @@ ATLLArBarrelPriGenAct::ATLLArBarrelPriGenAct()
       //
       auto particleDefinition = G4ParticleTable::GetParticleTable()->FindParticle( "e-" );
       fParticleGun->SetParticleDefinition( particleDefinition );
-      fParticleGun->SetParticleMomentumDirection( G4ThreeVector( 1.,0.,0. ) );
       fParticleGun->SetParticleEnergy( 1.*GeV );
-      fParticleGun->SetParticlePosition( G4ThreeVector( 0.,0.,3.5*m ) );
+      //Set default primary particle position to origin (0,0,0) and
+      //with atlas coordinates to eta=0.4 and ph=0.
+      //
+      fParticleGun->SetParticleMomentumDirection( G4ThreeVector( 0.925007,0.,0.379949 ) );
+      fParticleGun->SetParticlePosition( G4ThreeVector( 0.,0.,0.*m ) );
 }
 
 ATLLArBarrelPriGenAct::~ATLLArBarrelPriGenAct() {

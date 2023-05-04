@@ -1,7 +1,12 @@
 /run/initialize
-/run/printProgress 1
+/run/printProgress 10
 /gun/particle gamma
 /gun/energy 5 GeV
-/gun/direction 1 0 0
-/gun/position 0 0 3.5 m
+/gun/position 0. 0. 0. m
+#eta 0.4 phi 0
+/gun/direction 0.925007 0. 0.379949
+#eta 0.8 phi 0 (half calo)
+#/gun/direction 0.7477 0. 0.664037
+#eta 1.475 phi 0 (edge of calo)
+#/gun/direction 0.4348 0. 900527
 /run/beamOn 1000
