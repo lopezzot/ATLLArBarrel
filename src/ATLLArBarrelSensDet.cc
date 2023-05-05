@@ -56,7 +56,17 @@ G4bool ATLLArBarrelSensDet::ProcessHits(G4Step* aStep, G4TouchableHistory* th){
     //If Edep==0 or Eta<0. or Eta>0.8 (i.e. only A secion allowed) do not process hit
     //
     //if(/*Edep == 0.*/false || Eta<ATLLArBarrelTBConstants::EtaMin || Eta>ATLLArBarrelTBConstants::EtaChange) return false;
+    
+    //Calculate depth of hit inside STAC
+    //
+    const G4double Depth = R - (ATLLArBarrelTBConstants::RMinSTAC/std::sin(Theta));
+    ATLLArBarrelTBConstants::STACSection Section;
+    if (Depth<ATLLArBarrelTBConstants::FrontDepth) Section = ATLLArBarrelTBConstants::STACSection::Front; 
+    else if (Depth<ATLLArBarrelTBConstants::MiddleDepth) Section = ATLLArBarrelTBConstants::STACSection::Middle;
+    else Section = ATLLArBarrelTBConstants::STACSection::Back;
 
+
+    G4cout<<Section<<G4endl;
 
     return true;
 }
