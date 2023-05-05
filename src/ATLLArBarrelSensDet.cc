@@ -57,13 +57,15 @@ void ATLLArBarrelSensDet::Initialize(G4HCofThisEvent* HCE){
     //It can be accessed via the SDManager anytime for both storing and retrieving the hits collection.
     //If the hitcollection name is unambigous, it is enough to retrieve the ID (no need for SD name).
     //
-    G4int FrontHCID  = G4SDManager::GetSDMpointer()->GetCollectionID(fFrontHitsCollectionName); 
-    G4int MiddleHCID = G4SDManager::GetSDMpointer()->GetCollectionID(fMiddleHitsCollectionName); 
-    G4int BackHCID   = G4SDManager::GetSDMpointer()->GetCollectionID(fBackHitsCollectionName); 
+    static G4int FrontHCID = -1, MiddleHCID = -1, BackHCID = -1;
+    if(FrontHCID<0){ //prevent doing it every event -> HCIDs are identical for every event
+        FrontHCID  = G4SDManager::GetSDMpointer()->GetCollectionID(fFrontHitsCollectionName); 
+        MiddleHCID = G4SDManager::GetSDMpointer()->GetCollectionID(fMiddleHitsCollectionName); 
+        BackHCID   = G4SDManager::GetSDMpointer()->GetCollectionID(fBackHitsCollectionName); 
+    }
     HCE->AddHitsCollection( FrontHCID, fFrontHitsCollection ); 
     HCE->AddHitsCollection( MiddleHCID, fMiddleHitsCollection ); 
     HCE->AddHitsCollection( BackHCID, fBackHitsCollection ); 
-
 
 }
 
