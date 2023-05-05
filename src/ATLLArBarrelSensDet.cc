@@ -161,6 +161,12 @@ G4bool ATLLArBarrelSensDet::ProcessHits(G4Step* aStep, G4TouchableHistory* th){
             G4Exception("CalorimeterSD::ProcessHits()",
             "MyCode0004", FatalException, msg);
     }
+    if(!hit){
+        G4ExceptionDescription msg;
+        msg << "Cannot retrieve hit with HitID "<<HitID;
+        G4Exception("CalorimeterSD::ProcessHits()",
+        "MyCode0004", FatalException, msg);
+    }
 
     //Add edep to hit
     //
