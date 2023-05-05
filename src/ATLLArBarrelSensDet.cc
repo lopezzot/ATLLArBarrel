@@ -24,13 +24,28 @@
 //
 #include <cmath>
 
-ATLLArBarrelSensDet::ATLLArBarrelSensDet(const G4String& name, const G4String& hitsCollectionName)
-    : G4VSensitiveDetector(name) {
+ATLLArBarrelSensDet::ATLLArBarrelSensDet(const G4String& name)
+    : G4VSensitiveDetector(name),
+    fFrontHitsCollection(nullptr),
+    fMiddleHitsCollection(nullptr),
+    fBackHitsCollection(nullptr){
     
-    collectionName.insert(hitsCollectionName);
+    //Insert in vector of collection names the 3 collections' names
+    collectionName.insert(fFrontHitsCollectionName);
+    collectionName.insert(fMiddleHitsCollectionName);
+    collectionName.insert(fBackHitsCollectionName);
+
 }
 
-void ATLLArBarrelSensDet::Initialize(G4HCofThisEvent* hitCollection) {}
+void ATLLArBarrelSensDet::Initialize(G4HCofThisEvent* hitCollection){
+
+    //This method is called at the beginning of each event
+    //
+
+
+
+
+}
 
 G4bool ATLLArBarrelSensDet::ProcessHits(G4Step* aStep, G4TouchableHistory* th){
 

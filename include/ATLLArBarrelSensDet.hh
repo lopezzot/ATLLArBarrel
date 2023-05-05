@@ -9,6 +9,10 @@
 #ifndef ATLLArBarrelSensDet_h
 #define ATLLArBarrelSensDet_h 1
 
+//Includers from project files
+//
+#include "ATLLArBarrelHit.hh"
+
 //Includers from Geant4
 //
 #include "G4VSensitiveDetector.hh"
@@ -25,7 +29,7 @@ class G4HCofThisEvent;
 class ATLLArBarrelSensDet : public G4VSensitiveDetector {
 
     public:
-        ATLLArBarrelSensDet(const G4String& name, const G4String& hitsCollectionName);
+        ATLLArBarrelSensDet(const G4String& name);
         ~ATLLArBarrelSensDet() override = default;
 
         //methods from base class
@@ -35,6 +39,19 @@ class ATLLArBarrelSensDet : public G4VSensitiveDetector {
         void   EndOfEvent(G4HCofThisEvent* hitCollection) override;
 
     private:
+        //This sensitive detector creates 3 hits collection 
+        //(front, middle and back sections)
+        //
+        const G4String fFrontHitsCollectionName  = "FrontHitsCollection";
+        const G4String fMiddleHitsCollectionName = "MiddleHitsCollection";
+        const G4String fBackHitsCollectionName   = "BackHitsCollection";
+
+        //Pointer to hits collections allocated ("new") at each event
+        //
+        ATLLArBarrelHitsCollection* fFrontHitsCollection;
+        ATLLArBarrelHitsCollection* fMiddleHitsCollection;
+        ATLLArBarrelHitsCollection* fBackHitsCollection;
+
 };
 
 #endif
