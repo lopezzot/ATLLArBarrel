@@ -37,12 +37,32 @@ ATLLArBarrelSensDet::ATLLArBarrelSensDet(const G4String& name)
 
 }
 
-void ATLLArBarrelSensDet::Initialize(G4HCofThisEvent* hitCollection){
+void ATLLArBarrelSensDet::Initialize(G4HCofThisEvent* HCE){
 
-    //This method is called at the beginning of each event
+    /*This method is called at the beginning of each event.
+      The user must allocate with "new" the hits collections of this SD
+      and link them to the SD field pointers.
+      The user should as well add them to the hit collection of this event
+      in such a way hit collections are automatically cleaned at the end
+      of each event and can be accessed in the EndOfEvent method with
+      evet->GetHCofThisEvent().*/
+
+    //Hits Collections must have a unique pair of string (SDname + hitscollectionname)
     //
-
-
+    fFrontHitsCollection  = new ATLLArBarrelHitsCollection(GetName(), fFrontHitsCollectionName); 
+    fMiddleHitsCollection = new ATLLArBarrelHitsCollection(GetName(), fMiddleHitsCollectionName); 
+    fBackHitsCollection   = new ATLLArBarrelHitsCollection(GetName(), fBackHitsCollectionName); 
+    
+    //Hits Collections (among all SD of the simulations) are also identified by an integer.
+    //It can be accessed via the SDManager anytime for both storing and retrieving the hits collection.
+    //If the hitcollection name is unambigous, it is enough to retrieve the ID (no need for SD name).
+    //
+    G4int FrontHCID  = G4SDManager::GetSDMpointer()->GetCollectionID(fFrontHitsCollectionName); 
+    G4int MiddleHCID = G4SDManager::GetSDMpointer()->GetCollectionID(fMiddleHitsCollectionName); 
+    G4int BackHCID   = G4SDManager::GetSDMpointer()->GetCollectionID(fBackHitsCollectionName); 
+    HCE->AddHitsCollection( FrontHCID, fFrontHitsCollection ); 
+    HCE->AddHitsCollection( MiddleHCID, fMiddleHitsCollection ); 
+    HCE->AddHitsCollection( BackHCID, fBackHitsCollection ); 
 
 
 }
