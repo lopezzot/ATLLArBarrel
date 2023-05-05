@@ -73,6 +73,10 @@ namespace ATLLArBarrelTBConstants{
     const G4int FrontHitNo  = 1024;                    //Number of hit to be allocated
     const G4int MiddleHitNo = 512;                     //for front, middle and back
     const G4int BackHitNo   = 256;                     //section (fist half calo eta<0.8)
+    
+    const G4int BackEtasPerRow = 16;                   //Eta cells per row back section
+    const G4int MiddleEtasPerRow = BackEtasPerRow*2;   //Eta cells per row middle section
+    const G4int FrontEtasPerRow = MiddleEtasPerRow*8;  //Eta cells per row front section
 
 } //ATLLArBarrelTBConstants
 

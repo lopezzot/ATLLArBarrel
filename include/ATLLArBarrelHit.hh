@@ -23,13 +23,13 @@ class ATLLArBarrelHit : public G4VHit {
   
     public:
         ATLLArBarrelHit();
-        //ATLLArBarrelHit( const ATLLArBarrelHit& );
+        ATLLArBarrelHit( const ATLLArBarrelHit& ) = default;
         virtual ~ATLLArBarrelHit();
 
         //Operators (= and ==)
         //
-        //const ATLTileCalTBHit& operator=( const ATLTileCalTBHit& );
-        //G4bool operator==( const ATLTileCalTBHit& ) const;
+        ATLLArBarrelHit& operator=( const ATLLArBarrelHit& ) = default;
+        //G4bool operator==( const ATLLArBarrelHit& ) const;
 
         //Methods from base class
         //

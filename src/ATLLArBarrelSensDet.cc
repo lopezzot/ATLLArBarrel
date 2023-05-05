@@ -67,6 +67,18 @@ void ATLLArBarrelSensDet::Initialize(G4HCofThisEvent* HCE){
     HCE->AddHitsCollection( MiddleHCID, fMiddleHitsCollection ); 
     HCE->AddHitsCollection( BackHCID, fBackHitsCollection ); 
 
+    //Allocate fixed number of hits
+    //
+    for ( std::size_t i=0; i<ATLLArBarrelTBConstants::FrontHitNo; i++ ) {
+        fFrontHitsCollection->insert(new ATLLArBarrelHit());
+    }
+    for ( std::size_t i=0; i<ATLLArBarrelTBConstants::MiddleHitNo; i++ ) {
+        fMiddleHitsCollection->insert(new ATLLArBarrelHit());
+    }
+    for ( std::size_t i=0; i<ATLLArBarrelTBConstants::BackHitNo; i++ ) {
+        fBackHitsCollection->insert(new ATLLArBarrelHit());
+    }
+
 }
 
 G4bool ATLLArBarrelSensDet::ProcessHits(G4Step* aStep, G4TouchableHistory* th){
@@ -100,30 +112,59 @@ G4bool ATLLArBarrelSensDet::ProcessHits(G4Step* aStep, G4TouchableHistory* th){
     ATLLArBarrelTBConstants::STACSection Section;
     G4double DeltaEta = 0.;
     G4double DeltaPhi = 0.;
+    G4double EtasPerRow = 0.;
     if (Depth<ATLLArBarrelTBConstants::FrontDepth){
-        Section  = ATLLArBarrelTBConstants::STACSection::Front;
-        DeltaEta = ATLLArBarrelTBConstants::FrontDeltaEta;
-        DeltaPhi = ATLLArBarrelTBConstants::FrontDeltaPhi;
+        Section    = ATLLArBarrelTBConstants::STACSection::Front;
+        DeltaEta   = ATLLArBarrelTBConstants::FrontDeltaEta;
+        DeltaPhi   = ATLLArBarrelTBConstants::FrontDeltaPhi;
+        EtasPerRow = ATLLArBarrelTBConstants::FrontEtasPerRow;
     } 
     else if (Depth<ATLLArBarrelTBConstants::MiddleDepth){
-        Section  = ATLLArBarrelTBConstants::STACSection::Middle;
-        DeltaEta = ATLLArBarrelTBConstants::MiddleDeltaEta;
-        DeltaPhi = ATLLArBarrelTBConstants::MiddleDeltaPhi;
+        Section    = ATLLArBarrelTBConstants::STACSection::Middle;
+        DeltaEta   = ATLLArBarrelTBConstants::MiddleDeltaEta;
+        DeltaPhi   = ATLLArBarrelTBConstants::MiddleDeltaPhi;
+        EtasPerRow = ATLLArBarrelTBConstants::MiddleEtasPerRow;
     }
     else{
-        Section  = ATLLArBarrelTBConstants::STACSection::Back;
-        DeltaEta = ATLLArBarrelTBConstants::BackDeltaEta;
-        DeltaPhi = ATLLArBarrelTBConstants::BackDeltaPhi;
+        Section    = ATLLArBarrelTBConstants::STACSection::Back;
+        DeltaEta   = ATLLArBarrelTBConstants::BackDeltaEta;
+        DeltaPhi   = ATLLArBarrelTBConstants::BackDeltaPhi;
+        EtasPerRow = ATLLArBarrelTBConstants::BackEtasPerRow;
     }
 
-    //Calculate Eta and Phi index and Hitmap key
+    //Calculate Eta and Phi index
     //max EtaIdx value = 256, max PhiIdx value = 16
+    //
     G4int EtaIdx = std::floor(Eta/DeltaEta);
     G4int PhiIdx = std::floor((Phi+ATLLArBarrelTBConstants::halfSTACDeltaPhi)/DeltaPhi);
-    G4int HitKey = 100*EtaIdx+PhiIdx;
 
+    //Calculate hit index in collection
+    //
+    G4int HitID = PhiIdx*EtasPerRow + EtaIdx;
 
-    G4cout<<Section<<" "<<EtaIdx<<" "<<Phi<<" "<<PhiIdx<<" "<<HitKey<<G4endl;
+    //Get hit according to section and HitID
+    //
+    ATLLArBarrelHit* hit = nullptr;
+    switch(Section){
+        case ATLLArBarrelTBConstants::STACSection::Front:
+            hit = (*fFrontHitsCollection)[HitID];
+            break;
+        case ATLLArBarrelTBConstants::STACSection::Middle:
+            hit = (*fMiddleHitsCollection)[HitID];
+            break;
+        case ATLLArBarrelTBConstants::STACSection::Back:
+            hit = (*fBackHitsCollection)[HitID];
+            break;
+        default:
+            G4ExceptionDescription msg;
+            msg << "Wrong enum section value ";
+            G4Exception("CalorimeterSD::ProcessHits()",
+            "MyCode0004", FatalException, msg);
+    }
+
+    //Add edep to hit
+    //
+    hit->AddEdep(Edep);
 
     return true;
 }
