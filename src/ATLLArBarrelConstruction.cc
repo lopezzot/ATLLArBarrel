@@ -121,7 +121,7 @@ void ATLLArBarrelConstruction::ConstructSDandField(){
     auto LVStore = G4LogicalVolumeStore::GetInstance();
     for(auto LV : *LVStore){
     
-        if(LV->GetName()=="LAr::TBBarrel::Cryostat::LAr") LV->SetSensitiveDetector(LArSD);
+        if(LV->GetName()=="LAr::EMB::STAC") LV->SetSensitiveDetector(LArSD);
     }
 
     //No fields

@@ -10,6 +10,7 @@
 //Includers from project files
 //
 #include "ATLLArBarrelSensDet.hh"
+#include "ATLLArBarrelTBConstants.hh"
 
 //Includers from Geant4
 //
@@ -18,6 +19,10 @@
 #include "G4ThreeVector.hh"
 #include "G4SDManager.hh"
 #include "G4ios.hh"
+
+//Includers from STL
+//
+#include <cmath>
 
 ATLLArBarrelSensDet::ATLLArBarrelSensDet(const G4String& name, const G4String& hitsCollectionName)
     : G4VSensitiveDetector(name) {
@@ -41,14 +46,17 @@ G4bool ATLLArBarrelSensDet::ProcessHits(G4Step* aStep, G4TouchableHistory* th){
     //        "Dep(MeV) "<< aStep->GetTotalEnergyDeposit() << " " <<
     //        "Mat "     << aStep->GetPreStepPoint()->GetMaterial()->GetName() << " " << G4endl; 
     
-    //Get hit Eta and Phi values
+    //Get hit Eta, Theta, Phi and Magnitude values
     //
     auto Eta = aStep->GetPreStepPoint()->GetPosition().eta();
-    auto Phi = aStep->GetPreStepPoint()->GetPosition().phi();
+    auto Theta = aStep->GetPreStepPoint()->GetPosition().theta(); //rad
+    auto Phi = aStep->GetPreStepPoint()->GetPosition().phi();     //rad
     auto Edep = aStep->GetTotalEnergyDeposit();
-    //If Edep==0 or Eta<0. or Eta>1.3 do not process hit
+    auto R = aStep->GetPreStepPoint()->GetPosition().mag();       //mm
+    //If Edep==0 or Eta<0. or Eta>0.8 (i.e. only A secion allowed) do not process hit
     //
-    if(Edep == 0. || Eta<0. || Eta>1.3) return false;
+    //if(/*Edep == 0.*/false || Eta<ATLLArBarrelTBConstants::EtaMin || Eta>ATLLArBarrelTBConstants::EtaChange) return false;
+
 
     return true;
 }
