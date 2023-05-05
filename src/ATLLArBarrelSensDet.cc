@@ -61,12 +61,32 @@ G4bool ATLLArBarrelSensDet::ProcessHits(G4Step* aStep, G4TouchableHistory* th){
     //
     const G4double Depth = R - (ATLLArBarrelTBConstants::RMinSTAC/std::sin(Theta));
     ATLLArBarrelTBConstants::STACSection Section;
-    if (Depth<ATLLArBarrelTBConstants::FrontDepth) Section = ATLLArBarrelTBConstants::STACSection::Front; 
-    else if (Depth<ATLLArBarrelTBConstants::MiddleDepth) Section = ATLLArBarrelTBConstants::STACSection::Middle;
-    else Section = ATLLArBarrelTBConstants::STACSection::Back;
+    G4double DeltaEta = 0.;
+    G4double DeltaPhi = 0.;
+    if (Depth<ATLLArBarrelTBConstants::FrontDepth){
+        Section  = ATLLArBarrelTBConstants::STACSection::Front;
+        DeltaEta = ATLLArBarrelTBConstants::FrontDeltaEta;
+        DeltaPhi = ATLLArBarrelTBConstants::FrontDeltaPhi;
+    } 
+    else if (Depth<ATLLArBarrelTBConstants::MiddleDepth){
+        Section  = ATLLArBarrelTBConstants::STACSection::Middle;
+        DeltaEta = ATLLArBarrelTBConstants::MiddleDeltaEta;
+        DeltaPhi = ATLLArBarrelTBConstants::MiddleDeltaPhi;
+    }
+    else{
+        Section  = ATLLArBarrelTBConstants::STACSection::Back;
+        DeltaEta = ATLLArBarrelTBConstants::BackDeltaEta;
+        DeltaPhi = ATLLArBarrelTBConstants::BackDeltaPhi;
+    }
+
+    //Calculate Eta and Phi index and Hitmap key
+    //max EtaIdx value = 256, max PhiIdx value = 16
+    G4int EtaIdx = std::floor(Eta/DeltaEta);
+    G4int PhiIdx = std::floor((Phi+ATLLArBarrelTBConstants::halfSTACDeltaPhi)/DeltaPhi);
+    G4int HitKey = 100*EtaIdx+PhiIdx;
 
 
-    G4cout<<Section<<G4endl;
+    G4cout<<Section<<" "<<EtaIdx<<" "<<Phi<<" "<<PhiIdx<<" "<<HitKey<<G4endl;
 
     return true;
 }

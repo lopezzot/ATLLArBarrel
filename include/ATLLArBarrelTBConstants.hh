@@ -56,7 +56,19 @@ namespace ATLLArBarrelTBConstants{
                                              //front (4.3X0) + middle (16.0X0) + back (2.0X0)
     const G4double X0 = 470./22.3;           //X0 in mm
     const G4double FrontDepth = 4.3*X0;      //Front section depth (mm)
-    const G4double MiddleDepth = 16.0*X0;    //Middle section depth (mm)
+    const G4double MiddleDepth = FrontDepth + 16.0*X0; //Middle section depth (mm)
+
+    const G4double BackDeltaEta = 0.05;                //(rad)DeltaEta at back section
+                                                       //there are 16 eta bins in back section
+                                                       //up to eta=0.8 (first half of calo)
+    const G4double MiddleDeltaEta = BackDeltaEta/2.;   //(rad)Eta bins in middle section
+    const G4double FrontDeltaEta = MiddleDeltaEta/8.;  //(rad)Eta bins in front section
+
+    const G4double STACDeltaPhi   = 2.*M_PI/16;        //(rad)Delta Phi STAC
+    const G4double halfSTACDeltaPhi = STACDeltaPhi/2.;
+    const G4double FrontDeltaPhi  = STACDeltaPhi/4;    //(rad)Delta Phi front section
+    const G4double MiddleDeltaPhi = STACDeltaPhi/16;   //(rad)Delta Phi middle section
+    const G4double BackDeltaPhi   = MiddleDeltaPhi;    //(rad)Delta Phi back section
 
 } //ATLLArBarrelTBConstants
 
