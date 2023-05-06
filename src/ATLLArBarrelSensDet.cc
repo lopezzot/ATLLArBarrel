@@ -177,6 +177,11 @@ G4bool ATLLArBarrelSensDet::ProcessHits(G4Step* aStep, G4TouchableHistory* th){
     //Add edep to hit
     //
     hit->AddEdep(Edep);
+    if(!hit->HasPositionBeenAllocated()){
+        hit->SetEta(EtaIdx * DeltaEta);
+        hit->SetPhi(PhiIdx * DeltaPhi);
+        hit->SetPositionAllocated(true); 
+    }
 
     return true;
 }
