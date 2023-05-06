@@ -9,4 +9,6 @@
 #/gun/direction 0.7477 0. 0.664037
 #eta 1.475 phi 0 (edge of calo)
 #/gun/direction 0.4348 0. 900527
+#eta 0.4 phi M_PI/16
+#/gun/direction 0.907234 0.18046 0.379949
 /run/beamOn 100
