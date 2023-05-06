@@ -102,9 +102,15 @@ G4bool ATLLArBarrelSensDet::ProcessHits(G4Step* aStep, G4TouchableHistory* th){
     auto Phi = aStep->GetPreStepPoint()->GetPosition().phi();     //rad
     auto Edep = aStep->GetTotalEnergyDeposit();
     auto R = aStep->GetPreStepPoint()->GetPosition().mag();       //mm
+    
     //If Edep==0 or Eta<0. or Eta>0.8 (i.e. only A secion allowed) do not process hit
     //
-    //if(/*Edep == 0.*/false || Eta<ATLLArBarrelTBConstants::EtaMin || Eta>ATLLArBarrelTBConstants::EtaChange) return false;
+    if(/*Edep == 0.*/false || Eta<ATLLArBarrelTBConstants::EtaMin || Eta>ATLLArBarrelTBConstants::EtaChange) return false;
+    //If Phi>halfSTACBarrel or Phi<-halfSTACBarrel do not process hit,
+    //this is needed because of the accordion geometry of one only module,
+    //i.e. the DeltaPhi does not contain entirely the accordion tips
+    //
+    if(Phi>ATLLArBarrelTBConstants::halfSTACDeltaPhi || Phi<(-ATLLArBarrelTBConstants::halfSTACDeltaPhi)) return false; 
     
     //Calculate depth of hit inside STAC
     //
@@ -141,7 +147,7 @@ G4bool ATLLArBarrelSensDet::ProcessHits(G4Step* aStep, G4TouchableHistory* th){
     //Calculate hit index in collection
     //
     G4int HitID = PhiIdx*EtasPerRow + EtaIdx;
-
+    
     //Get hit according to section and HitID
     //
     ATLLArBarrelHit* hit = nullptr;
