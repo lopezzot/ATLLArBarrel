@@ -13,6 +13,7 @@
 //Includers from Geant4
 //
 #include "G4SystemOfUnits.hh"
+#include "G4Types.hh"
 
 //Includers from STL
 //
@@ -27,21 +28,7 @@ namespace ATLLArBarrelTBConstants{
         Middle = 1,
         Back =2
     };
-    /*//to be moved in a source file to avoid souble linking
-    std::ostream& operator<<(std::ostream& ostream, const STACSection& section){
-        switch (section) {
-            case STACSection::Front:
-                ostream << "Front Section";
-                break;
-            case STACSection::Middle:
-                ostream << "Middle Section";
-                break;
-            case STACSection::Back:
-                ostream << "Back Section";
-                break;
-        }   
-        return ostream;
-    }*/
+    std::ostream& operator<<(std::ostream& ostream, const STACSection& section);
  
     //Geometry parameters for hits and sensitive detector
     //
