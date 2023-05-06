@@ -24,12 +24,16 @@
 //
 #include <cmath>
 
+const G4String ATLLArBarrelSensDet::fFrontHitsCollectionName  = "FrontHitsCollectionName";
+const G4String ATLLArBarrelSensDet::fBackHitsCollectionName   = "BackHitsCollectionName";
+const G4String ATLLArBarrelSensDet::fMiddleHitsCollectionName = "MiddleHitsCollectionName";
+
 ATLLArBarrelSensDet::ATLLArBarrelSensDet(const G4String& name)
     : G4VSensitiveDetector(name),
     fFrontHitsCollection(nullptr),
     fMiddleHitsCollection(nullptr),
     fBackHitsCollection(nullptr){
-    
+
     //Insert in vector of collection names the 3 collections' names
     collectionName.insert(fFrontHitsCollectionName);
     collectionName.insert(fMiddleHitsCollectionName);

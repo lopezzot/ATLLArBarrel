@@ -27,6 +27,7 @@ namespace ATLLArBarrelTBConstants{
         Middle = 1,
         Back =2
     };
+    /*//to be moved in a source file to avoid souble linking
     std::ostream& operator<<(std::ostream& ostream, const STACSection& section){
         switch (section) {
             case STACSection::Front:
@@ -40,7 +41,7 @@ namespace ATLLArBarrelTBConstants{
                 break;
         }   
         return ostream;
-    }
+    }*/
  
     //Geometry parameters for hits and sensitive detector
     //

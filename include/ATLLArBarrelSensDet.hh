@@ -38,14 +38,14 @@ class ATLLArBarrelSensDet : public G4VSensitiveDetector {
         G4bool ProcessHits(G4Step* step, G4TouchableHistory* history) override;
         void   EndOfEvent(G4HCofThisEvent* hitCollection) override;
 
-    private:
         //This sensitive detector creates 3 hits collection 
         //(front, middle and back sections)
         //
-        const G4String fFrontHitsCollectionName  = "FrontHitsCollection";
-        const G4String fMiddleHitsCollectionName = "MiddleHitsCollection";
-        const G4String fBackHitsCollectionName   = "BackHitsCollection";
+        static const G4String fFrontHitsCollectionName;
+        static const G4String fMiddleHitsCollectionName;
+        static const G4String fBackHitsCollectionName;
 
+    private:
         //Pointer to hits collections allocated ("new") at each event
         //
         ATLLArBarrelHitsCollection* fFrontHitsCollection;
