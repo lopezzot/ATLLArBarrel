@@ -151,7 +151,6 @@ G4bool ATLLArBarrelSensDet::ProcessHits(G4Step* aStep, G4TouchableHistory* th){
     //
     G4int HitID = PhiIdx*EtasPerRow + EtaIdx;
     CheckHitID(Section, HitID); //throws fatal exception if >MaxHitNo 
-    //G4cout<<Section<<" "<<HitID<<" "<<EtaIdx<<" "<<PhiIdx<<" "<<Eta<<" "<<Phi<<G4endl;
 
     //Get hit according to section and HitID
     //

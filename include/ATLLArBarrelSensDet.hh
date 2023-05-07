@@ -63,7 +63,7 @@ class ATLLArBarrelSensDet : public G4VSensitiveDetector {
 //Inline definition of class methods
 //
 inline void ATLLArBarrelSensDet::CheckHitID(const ATLLArBarrelTBConstants::STACSection& Section, const G4int& HitID) const{
- 
+
     switch(Section){
         case ATLLArBarrelTBConstants::STACSection::Front:
             if(HitID > ATLLArBarrelTBConstants::FrontHitNo){
@@ -80,6 +80,7 @@ inline void ATLLArBarrelSensDet::CheckHitID(const ATLLArBarrelTBConstants::STACS
                 G4Exception("CalorimeterSD::CheckHitID()",
                 "MyCode0004", FatalException, msg);
             }
+            break;
         case ATLLArBarrelTBConstants::STACSection::Back:
             if(HitID > ATLLArBarrelTBConstants::BackHitNo){
                 G4ExceptionDescription msg;
@@ -87,6 +88,7 @@ inline void ATLLArBarrelSensDet::CheckHitID(const ATLLArBarrelTBConstants::STACS
                 G4Exception("CalorimeterSD::CheckHitID()",
                 "MyCode0004", FatalException, msg);
             }
+            break;
         default:
             break;
     }
