@@ -84,6 +84,10 @@ void ATLLArBarrelEventAction::EndOfEventAction(const G4Event* event){
     for (std::size_t n = 0; n < ATLLArBarrelTBConstants::MiddleHitNo; ++n) fMiddleHitsEdepVector[n]= (*MiddleHC)[n]->GetEdep();
     for (std::size_t n = 0; n < ATLLArBarrelTBConstants::BackHitNo; ++n)   fBackHitsEdepVector[n]  = (*BackHC)[n]->GetEdep();
 
+    //Save data in root file
+    //
+    auto AnalysisManager = G4AnalysisManager::Instance();
+    AnalysisManager->AddNtupleRow(); //this automatically allocated entried with vectors in root file
 }
 
 //**************************************************

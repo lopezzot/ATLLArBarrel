@@ -37,8 +37,8 @@ class ATLLArBarrelEventAction : public G4UserEventAction {
         //Methods to be called by G4AnalysisManager at the AddNtupleRow() call
         //
         std::vector<G4double>& GetFrontHitsEdepVector() { return fFrontHitsEdepVector; };
-        //std::vector<G4double>& GetMiddleHitsEdepVector(){ return fMiddleHitsEdepVector; };
-        //std::vector<G4double>& GetBackHitsEdepVector()  { return fBackHitsEdepVector; };
+        std::vector<G4double>& GetMiddleHitsEdepVector(){ return fMiddleHitsEdepVector; };
+        std::vector<G4double>& GetBackHitsEdepVector()  { return fBackHitsEdepVector; };
 
     private:
         //This method is a wrapper around the kernel method event->GetHCofThisEvent()->GetHC(hcID)

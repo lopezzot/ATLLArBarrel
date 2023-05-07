@@ -14,7 +14,10 @@
 #include "ATLLArBarrelEventAction.hh"
 
 ATLLArBarrelActIni::ATLLArBarrelActIni( )
-    : G4VUserActionInitialization(){}
+    : G4VUserActionInitialization(){
+    
+    fEventAction = new ATLLArBarrelEventAction();
+}
 
 ATLLArBarrelActIni::~ATLLArBarrelActIni() {}
 
@@ -26,12 +29,13 @@ void ATLLArBarrelActIni::BuildForMaster() const {
     // this method to instantiate user action classes except for user
     // run action."
     //
-    SetUserAction(new ATLLArBarrelRunAction());
+    SetUserAction(new ATLLArBarrelRunAction(fEventAction));
 }
 
 void ATLLArBarrelActIni::Build() const {
     SetUserAction( new ATLLArBarrelPriGenAct );
-    SetUserAction( new ATLLArBarrelEventAction );
+    SetUserAction( fEventAction );
+    SetUserAction( new ATLLArBarrelRunAction(fEventAction));
 }
 
 //**************************************************
