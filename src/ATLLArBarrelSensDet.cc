@@ -10,7 +10,6 @@
 //Includers from project files
 //
 #include "ATLLArBarrelSensDet.hh"
-#include "ATLLArBarrelTBConstants.hh"
 
 //Includers from Geant4
 //
@@ -151,7 +150,9 @@ G4bool ATLLArBarrelSensDet::ProcessHits(G4Step* aStep, G4TouchableHistory* th){
     //Calculate hit index in collection
     //
     G4int HitID = PhiIdx*EtasPerRow + EtaIdx;
-    
+    CheckHitID(Section, HitID); //throws fatal exception if >MaxHitNo 
+    //G4cout<<Section<<" "<<HitID<<" "<<EtaIdx<<" "<<PhiIdx<<" "<<Eta<<" "<<Phi<<G4endl;
+
     //Get hit according to section and HitID
     //
     ATLLArBarrelHit* hit = nullptr;

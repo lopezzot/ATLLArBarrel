@@ -12,6 +12,7 @@
 //Includers from project files
 //
 #include "ATLLArBarrelHit.hh"
+#include "ATLLArBarrelTBConstants.hh"
 
 //Includers from Geant4
 //
@@ -52,7 +53,44 @@ class ATLLArBarrelSensDet : public G4VSensitiveDetector {
         ATLLArBarrelHitsCollection* fMiddleHitsCollection;
         ATLLArBarrelHitsCollection* fBackHitsCollection;
 
+        //Method to check if the HitID calculated in the ProcessHits method
+        //is not outside the boundaries of hits per section
+        //
+        void CheckHitID(const ATLLArBarrelTBConstants::STACSection& Section, const G4int& HitID  ) const;
+
 };
+
+//Inline definition of class methods
+//
+inline void ATLLArBarrelSensDet::CheckHitID(const ATLLArBarrelTBConstants::STACSection& Section, const G4int& HitID) const{
+ 
+    switch(Section){
+        case ATLLArBarrelTBConstants::STACSection::Front:
+            if(HitID > ATLLArBarrelTBConstants::FrontHitNo){
+                G4ExceptionDescription msg;
+                msg << "Wrong HitID "<<HitID<<" for section " << Section;
+                G4Exception("CalorimeterSD::CheckHitID()",
+                "MyCode0004", FatalException, msg);
+            }
+            break;
+        case ATLLArBarrelTBConstants::STACSection::Middle:
+            if(HitID > ATLLArBarrelTBConstants::MiddleHitNo){
+                G4ExceptionDescription msg;
+                msg << "Wrong HitID "<<HitID<<" for section " << Section;
+                G4Exception("CalorimeterSD::CheckHitID()",
+                "MyCode0004", FatalException, msg);
+            }
+        case ATLLArBarrelTBConstants::STACSection::Back:
+            if(HitID > ATLLArBarrelTBConstants::BackHitNo){
+                G4ExceptionDescription msg;
+                msg << "Wrong HitID "<<HitID<<" for section " << Section;
+                G4Exception("CalorimeterSD::CheckHitID()",
+                "MyCode0004", FatalException, msg);
+            }
+        default:
+            break;
+    }
+}
 
 #endif
 

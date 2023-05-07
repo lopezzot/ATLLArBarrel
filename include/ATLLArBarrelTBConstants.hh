@@ -26,7 +26,7 @@ namespace ATLLArBarrelTBConstants{
     enum class STACSection : int {
         Front = 0,
         Middle = 1,
-        Back =2
+        Back = 2
     };
     std::ostream& operator<<(std::ostream& ostream, const STACSection& section);
  

@@ -13,7 +13,7 @@
 
 using namespace ATLLArBarrelTBConstants;
 
-std::ostream& operator<<(std::ostream& ostream, const STACSection& section){
+std::ostream& ATLLArBarrelTBConstants::operator<<(std::ostream& ostream, const STACSection& section){
     switch (section) {
         case STACSection::Front:
             ostream << "Front Section";
@@ -24,9 +24,8 @@ std::ostream& operator<<(std::ostream& ostream, const STACSection& section){
         case STACSection::Back:
             ostream << "Back Section";
             break;
-    }   
+    }
     return ostream;
 }
 
 //**************************************************
-
