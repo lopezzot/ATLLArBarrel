@@ -37,7 +37,7 @@ void ATLLArBarrelActIni::Build() const {
     SetUserAction( new ATLLArBarrelPriGenAct );
     SetUserAction( fEventAction );
     SetUserAction( new ATLLArBarrelRunAction(fEventAction));
-    SetUserAction( new ATLLArBarrelTrackingAction() );
+    SetUserAction( new ATLLArBarrelTrackingAction(fEventAction) );
 }
 
 //**************************************************

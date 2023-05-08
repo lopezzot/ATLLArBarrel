@@ -36,7 +36,8 @@
 //Constructor and de-constructor
 //
 ATLLArBarrelEventAction::ATLLArBarrelEventAction()
-    : G4UserEventAction(){
+    : G4UserEventAction(),
+      fHasHadronInteracted(false){
 
     fFrontHitsEdepVector  = std::vector<G4double>(ATLLArBarrelTBConstants::FrontHitNo, 0.);
     fMiddleHitsEdepVector = std::vector<G4double>(ATLLArBarrelTBConstants::MiddleHitNo, 0.);

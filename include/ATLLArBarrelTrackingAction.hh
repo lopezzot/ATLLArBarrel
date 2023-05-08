@@ -13,11 +13,12 @@
 //Includers from Geant4
 //
 #include "G4UserTrackingAction.hh"
+#include "ATLLArBarrelEventAction.hh"
 
 class ATLLArBarrelTrackingAction : public G4UserTrackingAction {
 
     public:
-        ATLLArBarrelTrackingAction();
+        ATLLArBarrelTrackingAction(ATLLArBarrelEventAction* EvtAction);
         ~ATLLArBarrelTrackingAction();
 
     public:
@@ -25,6 +26,8 @@ class ATLLArBarrelTrackingAction : public G4UserTrackingAction {
         //
         virtual void PreUserTrackingAction(const G4Track*);
         virtual void PostUserTrackingAction(const G4Track*);
+    private:
+        ATLLArBarrelEventAction* fEventAction;
 
 };
 

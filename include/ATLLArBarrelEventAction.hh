@@ -40,6 +40,11 @@ class ATLLArBarrelEventAction : public G4UserEventAction {
         std::vector<G4double>& GetMiddleHitsEdepVector(){ return fMiddleHitsEdepVector; };
         std::vector<G4double>& GetBackHitsEdepVector()  { return fBackHitsEdepVector; };
 
+        //Method to modify and get fHasHadronInteracted
+        //
+        void SetHasHadronInteracted(G4bool interaction){ fHasHadronInteracted = interaction; };
+        G4bool GetHadHadronInteracted(G4bool fHadHadronInteracted){ return fHadHadronInteracted; };
+
     private:
         //This method is a wrapper around the kernel method event->GetHCofThisEvent()->GetHC(hcID)
         //
@@ -50,6 +55,10 @@ class ATLLArBarrelEventAction : public G4UserEventAction {
         std::vector<G4double> fFrontHitsEdepVector;
         std::vector<G4double> fMiddleHitsEdepVector;
         std::vector<G4double> fBackHitsEdepVector;
+
+        //Boolean to store if the primary hadron has interacted
+        //
+        G4bool fHasHadronInteracted;
 };
                      
 #endif //ATLLArBarrelEventAction_h
