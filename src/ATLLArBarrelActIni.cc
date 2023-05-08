@@ -12,6 +12,7 @@
 #include "ATLLArBarrelPriGenAct.hh"
 #include "ATLLArBarrelRunAction.hh"
 #include "ATLLArBarrelEventAction.hh"
+#include "ATLLArBarrelTrackingAction.hh"
 
 ATLLArBarrelActIni::ATLLArBarrelActIni( )
     : G4VUserActionInitialization(){
@@ -36,6 +37,7 @@ void ATLLArBarrelActIni::Build() const {
     SetUserAction( new ATLLArBarrelPriGenAct );
     SetUserAction( fEventAction );
     SetUserAction( new ATLLArBarrelRunAction(fEventAction));
+    SetUserAction( new ATLLArBarrelTrackingAction() );
 }
 
 //**************************************************
