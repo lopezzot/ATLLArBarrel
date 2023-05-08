@@ -25,6 +25,14 @@
 #endif
 #include "G4SDManager.hh"
 
+//Includers from STL
+//
+#include <algorithm>
+
+//macros to control execution
+//
+//#define PRINTHITS
+
 //Constructor and de-constructor
 //
 ATLLArBarrelEventAction::ATLLArBarrelEventAction()
@@ -88,6 +96,22 @@ void ATLLArBarrelEventAction::EndOfEventAction(const G4Event* event){
     //
     auto AnalysisManager = G4AnalysisManager::Instance();
     AnalysisManager->AddNtupleRow(); //this automatically allocated entried with vectors in root file
+
+    //Printout event hits information for debugging
+    //
+    #ifdef PRINTHITS
+    //Find hit with max Edep and print hit info
+    std::size_t MaxFrontEdep = static_cast<std::size_t>(std::max_element(std::begin(fFrontHitsEdepVector), std::end(fFrontHitsEdepVector))-std::begin(fFrontHitsEdepVector)); 
+    G4cout<<"--> Front hits: ";
+    (*FrontHC)[MaxFrontEdep]->Print();
+    std::size_t MaxMiddleEdep = static_cast<std::size_t>(std::max_element(std::begin(fMiddleHitsEdepVector), std::end(fMiddleHitsEdepVector))-std::begin(fMiddleHitsEdepVector)); 
+    G4cout<<"--> Middle hits: ";
+    (*MiddleHC)[MaxMiddleEdep]->Print();
+    std::size_t MaxBackEdep = static_cast<std::size_t>(std::max_element(std::begin(fBackHitsEdepVector), std::end(fBackHitsEdepVector))-std::begin(fBackHitsEdepVector)); 
+    G4cout<<"--> Back hits: ";
+    (*BackHC)[MaxBackEdep]->Print();
+    G4cout<<"----------------------"<<G4endl;
+    #endif //PRINTHITS
 }
 
 //**************************************************

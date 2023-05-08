@@ -34,7 +34,7 @@ class ATLLArBarrelHit : public G4VHit {
         //Methods from base class
         //
         virtual void Draw() override{}
-        virtual void Print()override{};
+        virtual void Print()override;
 
         //Methods to handle data
         //
@@ -69,6 +69,11 @@ inline void ATLLArBarrelHit::SetPositionAllocated(G4bool PosAllocated) { fPositi
 inline void ATLLArBarrelHit::SetEta(G4double Eta) { fHitEta = Eta; }
 
 inline void ATLLArBarrelHit::SetPhi(G4double Phi) { fHitEta = Phi; }
+
+inline void ATLLArBarrelHit::Print() {
+
+    G4cout<<"Hit at Phi "<<fHitPhi<<" Eta "<<fHitEta<<" Edep "<<fEdep<<G4endl;
+}
 
 #endif //ATLLArBarrelHit_h 1
 
