@@ -68,7 +68,7 @@ inline void ATLLArBarrelHit::SetPositionAllocated(G4bool PosAllocated) { fPositi
 
 inline void ATLLArBarrelHit::SetEta(G4double Eta) { fHitEta = Eta; }
 
-inline void ATLLArBarrelHit::SetPhi(G4double Phi) { fHitEta = Phi; }
+inline void ATLLArBarrelHit::SetPhi(G4double Phi) { fHitPhi = Phi; }
 
 inline void ATLLArBarrelHit::Print() {
 
