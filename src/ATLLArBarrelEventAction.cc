@@ -68,6 +68,7 @@ void ATLLArBarrelEventAction::BeginOfEventAction([[maybe_unused]] const G4Event*
     
     //Clean fields of EventAction
     //
+    fHasHadronInteracted = false;
     for(auto& value : fFrontHitsEdepVector){value=0.;}
     for(auto& value : fMiddleHitsEdepVector){value=0.;}
     for(auto& value : fBackHitsEdepVector){value=0.;}
@@ -96,6 +97,7 @@ void ATLLArBarrelEventAction::EndOfEventAction(const G4Event* event){
     //Save data in root file
     //
     auto AnalysisManager = G4AnalysisManager::Instance();
+    AnalysisManager->FillNtupleIColumn(0, GetHasHadronInteracted());//save variable on had interaction
     AnalysisManager->AddNtupleRow(); //this automatically allocated entried with vectors in root file
 
     //Printout event hits information for debugging

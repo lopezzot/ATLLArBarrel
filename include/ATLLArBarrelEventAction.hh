@@ -43,7 +43,7 @@ class ATLLArBarrelEventAction : public G4UserEventAction {
         //Method to modify and get fHasHadronInteracted
         //
         void SetHasHadronInteracted(G4bool interaction){ fHasHadronInteracted = interaction; };
-        G4bool GetHadHadronInteracted(G4bool fHadHadronInteracted){ return fHadHadronInteracted; };
+        G4bool GetHasHadronInteracted(){ return fHasHadronInteracted; };
 
     private:
         //This method is a wrapper around the kernel method event->GetHCofThisEvent()->GetHC(hcID)
