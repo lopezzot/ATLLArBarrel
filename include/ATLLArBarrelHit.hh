@@ -10,10 +10,6 @@
 #ifndef ATLLArBarrelHit_h
 #define ATLLArBarrelHit_h 1
 
-//Includers from project files
-//
-//#include "ATLLArBarrelConstants.hh"
-
 //Includers from Geant4
 //
 #include "G4VHit.hh"
