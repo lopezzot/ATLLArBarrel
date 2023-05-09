@@ -21,7 +21,7 @@ A Geant4 simulation of the ATLAS LAr Barrel beam test setup.<br />
       <ul>
         <li><a href="#build-compile-and-execute-on-maclinux">Build, compile and execute on Mac/Linux</a></li>
         <li><a href="#build-compile-and-execute-on-lxplus">Build, compile and execute on lxplus</a></li>
-        <li><a href="debug-with-lldb">Debug with lldb</a></li>
+        <li><a href="#debug-with-lldb">Debug with lldb</a></li>
       </ul>
     </li>
     <li><a href="#g4hepem-integration">G4HepEm integration</a></li>
