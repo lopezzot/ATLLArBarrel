@@ -21,6 +21,7 @@ A Geant4 simulation of the ATLAS LAr Barrel beam test setup.<br />
       <ul>
         <li><a href="#build-compile-and-execute-on-maclinux">Build, compile and execute on Mac/Linux</a></li>
         <li><a href="#build-compile-and-execute-on-lxplus">Build, compile and execute on lxplus</a></li>
+        <li><a href="debug-with-lldb">Debug with lldb</a></li>
       </ul>
     </li>
     <li><a href="#g4hepem-integration">G4HepEm integration</a></li>
@@ -88,6 +89,18 @@ Parser options
 3. execute (example with TBrun.mac macro card, 2 threads and FTFP_BERT physics list)
    ```sh
    ./ATLLArBarrel -m run.mac -t 2 -p FTFP_BERT
+   ```
+### Debug with lldb
+1. Compile with debug compiler option, make and start debugger
+   ```sh
+   cmake -DCMAKE_BUILD_TYPE=Debug -DGeant4_DIR=/path-to/geant4-11.1.0-install/lib/Geant4-11.1.0/ /path-to-dir/ATLLArBarrel/
+   make
+   lldb
+   ```
+2. Set the lldb target and run with arguments
+   ```sh
+   target create ATLLArBarrel
+   run -m run.mac -p FTFP_BERT -t 2
    ```
 
 <!--G4HepEm integration-->
