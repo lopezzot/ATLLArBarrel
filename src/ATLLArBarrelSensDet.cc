@@ -108,13 +108,14 @@ G4bool ATLLArBarrelSensDet::ProcessHits(G4Step* aStep, G4TouchableHistory* th){
     
     //If Edep==0 or Eta<0. or Eta>0.8 (i.e. only A secion allowed) do not process hit
     //
-    if(/*Edep == 0.*/false || Eta<ATLLArBarrelTBConstants::EtaMin || Eta>ATLLArBarrelTBConstants::EtaChange) return false;
+    if(Edep == 0. || Eta<ATLLArBarrelTBConstants::EtaMin || Eta>ATLLArBarrelTBConstants::EtaChange) return false;
     //If Phi>halfSTACBarrel or Phi<-halfSTACBarrel do not process hit,
     //this is needed because of the accordion geometry of one only module,
     //i.e. the DeltaPhi does not contain entirely the accordion tips
     //
     if(Phi>ATLLArBarrelTBConstants::halfSTACDeltaPhi || Phi<(-ATLLArBarrelTBConstants::halfSTACDeltaPhi)) return false; 
-    
+    Edep = ApplyBirks(Edep, aStep->GetStepLength()/10.);
+ 
     //Calculate depth of hit inside STAC
     //
     const G4double Depth = R - (ATLLArBarrelTBConstants::RMinSTAC/std::sin(Theta));

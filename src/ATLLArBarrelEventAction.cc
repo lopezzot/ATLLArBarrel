@@ -28,6 +28,7 @@
 //Includers from STL
 //
 #include <algorithm>
+#include <numeric>
 
 //macros to control execution
 //
@@ -98,6 +99,10 @@ void ATLLArBarrelEventAction::EndOfEventAction(const G4Event* event){
     //
     auto AnalysisManager = G4AnalysisManager::Instance();
     AnalysisManager->FillNtupleIColumn(0, GetHasHadronInteracted());//save variable on had interaction
+    AnalysisManager->FillNtupleDColumn(1,
+                                       std::accumulate(fFrontHitsEdepVector.begin(),fFrontHitsEdepVector.end(),0.)+
+                                       std::accumulate(fMiddleHitsEdepVector.begin(),fMiddleHitsEdepVector.end(),0.)+
+                                       std::accumulate(fBackHitsEdepVector.begin(),fBackHitsEdepVector.end(),0.));
     AnalysisManager->AddNtupleRow(); //this automatically allocated entried with vectors in root file
 
     //Printout event hits information for debugging

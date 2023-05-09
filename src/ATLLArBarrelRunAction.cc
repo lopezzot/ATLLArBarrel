@@ -43,6 +43,7 @@ ATLLArBarrelRunAction::ATLLArBarrelRunAction(ATLLArBarrelEventAction* evtAction)
     //
     analysisManager->CreateNtuple("ATLLArBarrelout", "ATLLArBarreloutput");
     analysisManager->CreateNtupleIColumn("HadInteraction");
+    analysisManager->CreateNtupleDColumn("EnergyLAr");
     analysisManager->CreateNtupleDColumn("FrontHitsEdep", fEventAction->GetFrontHitsEdepVector());
     analysisManager->CreateNtupleDColumn("MiddleHitsEdep",fEventAction->GetMiddleHitsEdepVector());
     analysisManager->CreateNtupleDColumn("BackHitsEdep",  fEventAction->GetBackHitsEdepVector());
