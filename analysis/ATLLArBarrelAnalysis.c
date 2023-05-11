@@ -6,7 +6,10 @@ void ATLLArBarrelAnalysis(){
     
     //Open file and get tree
     //
-    std::string filename = "/Users/lorenzopezzotti/Desktop/ATLBarrel/test/buildg41110/ATLLArBarrelOut_Run0_35e-.root";
+    //std::string filename = "/Users/lorenzopezzotti/Desktop/ATLBarrel/test/buildg41110/ATLLArBarrelOut_Run0.root";
+    //std::string filename = "/Users/lorenzopezzotti/Desktop/ATLBarrel/test/buildg41110/ATLLArBarrelOut_Run0_35e-.root";
+    //std::string filename = "/Users/lorenzopezzotti/Desktop/ATLBarrel/test/buildg41110/eta0.2phi0.01225/20gamma.root";
+    //std::string filename = "/Users/lorenzopezzotti/Desktop/ATLBarrel/test/buildg41110/eta0.2phi0.0245/20gamma.root";
     TFile* file = TFile::Open( filename.c_str(), "READ");
     TTree* tree = static_cast<TTree*>(file->Get("ATLLArBarrelout"));
 
@@ -23,8 +26,8 @@ void ATLLArBarrelAnalysis(){
 
     //Allocate histograms
     //
-    TH1F* RPhiH1 = new TH1F("RPhi_H1","RPhi",3500,0.7,1.05);
-    TH1F* REtaH1 = new TH1F("REta_H1","REta",200,0.8,1.0);
+    TH1F* RPhiH1 = new TH1F("RPhi_H1","RPhi",35,0.7,1.05);
+    TH1F* REtaH1 = new TH1F("REta_H1","REta",20,0.8,1.0);
 
     //Loop over events
     //
@@ -38,7 +41,7 @@ void ATLLArBarrelAnalysis(){
         //
         auto MiddleMax = std::distance(Middle->begin(),(std::max_element(Middle->begin(),Middle->end())));
         //std::cout<<MiddleMax<<std::endl;
-        if(MiddleMax!=271) continue; //exclude events where max is not centered in hit 271
+        //if(MiddleMax!=271) continue; //exclude events where max is not centered in hit 271
 
         int MMRawM1 = MiddleMax - 1*MiddleEtasPerRow;
         int MMRawM2 = MiddleMax - 2*MiddleEtasPerRow;
@@ -68,7 +71,7 @@ void ATLLArBarrelAnalysis(){
                       Middle->at(MMRawP3)+Middle->at(MMRawP3-1)+Middle->at(MMRawP3+1)+Middle->at(MMRawP3-2)+Middle->at(MMRawP3+2)+Middle->at(MMRawP3-3)+Middle->at(MMRawP3+3);
 
         RPhi = E3x3/E3x7;
-        REta = E3x3/E7x7;
+        REta = E3x7/E7x7;
         RPhiH1->Fill(RPhi);
         REtaH1->Fill(REta);
 
