@@ -9,7 +9,9 @@ void ATLLArBarrelAnalysis(){
     //std::string filename = "/Users/lorenzopezzotti/Desktop/ATLBarrel/test/buildg41110/ATLLArBarrelOut_Run0.root";
     //std::string filename = "/Users/lorenzopezzotti/Desktop/ATLBarrel/test/buildg41110/ATLLArBarrelOut_Run0_35e-.root";
     //std::string filename = "/Users/lorenzopezzotti/Desktop/ATLBarrel/test/buildg41110/eta0.2phi0.01225/20gamma.root";
-    //std::string filename = "/Users/lorenzopezzotti/Desktop/ATLBarrel/test/buildg41110/eta0.2phi0.0245/20gamma.root";
+    //std::string filename = "/Users/lorenzopezzotti/Desktop/ATLBarrel/test/buildg41110/eta0.2phi0.0245_noise/20gamma.root";
+    //std::string filename = "/Users/lorenzopezzotti/Desktop/ATLBarrel/test/buildg41110/eta0.2phi0.0245_noise_0.1/20gamma.root";
+    std::string filename = "/Users/lorenzopezzotti/Desktop/ATLBarrel/test/buildg41110/eta0.2phi0.0245_noise_0.01/20gamma.root";
     TFile* file = TFile::Open( filename.c_str(), "READ");
     TTree* tree = static_cast<TTree*>(file->Get("ATLLArBarrelout"));
 
@@ -26,8 +28,8 @@ void ATLLArBarrelAnalysis(){
 
     //Allocate histograms
     //
-    TH1F* RPhiH1 = new TH1F("RPhi_H1","RPhi",35,0.7,1.05);
-    TH1F* REtaH1 = new TH1F("REta_H1","REta",20,0.8,1.0);
+    TH1F* RPhiH1 = new TH1F("RPhi_H1","RPhi",20,0.7,1.1);
+    TH1F* REtaH1 = new TH1F("REta_H1","REta",20,0.7,1.1);
 
     //Loop over events
     //
