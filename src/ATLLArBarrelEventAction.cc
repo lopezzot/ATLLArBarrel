@@ -24,6 +24,9 @@
 #include "G4AnalysisManager.hh"
 #endif
 #include "G4SDManager.hh"
+#ifndef NONOISE
+#include "Randomize.hh"
+#endif
 
 //Includers from STL
 //
@@ -33,6 +36,7 @@
 //macros to control execution
 //
 //#define PRINTHITS
+//#define NONOISE
 
 //Constructor and de-constructor
 //
@@ -94,6 +98,17 @@ void ATLLArBarrelEventAction::EndOfEventAction(const G4Event* event){
     for (std::size_t n = 0; n < ATLLArBarrelTBConstants::FrontHitNo; ++n)  fFrontHitsEdepVector[n] = (*FrontHC)[n]->GetEdep();
     for (std::size_t n = 0; n < ATLLArBarrelTBConstants::MiddleHitNo; ++n) fMiddleHitsEdepVector[n]= (*MiddleHC)[n]->GetEdep();
     for (std::size_t n = 0; n < ATLLArBarrelTBConstants::BackHitNo; ++n)   fBackHitsEdepVector[n]  = (*BackHC)[n]->GetEdep();
+    
+    //Add electronic noise: gaussian with sigma 20 MeV equivalent
+    //
+    #ifndef NONOISE
+    for (std::size_t n = 0; n < ATLLArBarrelTBConstants::FrontHitNo; ++n){
+        fFrontHitsEdepVector[n] += G4RandGauss::shoot(0.,ATLLArBarrelTBConstants::ElectNoiseSigma);}
+    for (std::size_t n = 0; n < ATLLArBarrelTBConstants::MiddleHitNo; ++n){
+        fMiddleHitsEdepVector[n] += G4RandGauss::shoot(0.,ATLLArBarrelTBConstants::ElectNoiseSigma);}
+    for (std::size_t n = 0; n < ATLLArBarrelTBConstants::BackHitNo; ++n){
+        fBackHitsEdepVector[n]  += G4RandGauss::shoot(0.,ATLLArBarrelTBConstants::ElectNoiseSigma);}
+    #endif
 
     //Save data in root file
     //

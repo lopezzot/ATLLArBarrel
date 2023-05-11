@@ -66,6 +66,14 @@ namespace ATLLArBarrelTBConstants{
     constexpr G4int MiddleEtasPerRow = BackEtasPerRow*2;   //Eta cells per row middle section
     constexpr G4int FrontEtasPerRow = MiddleEtasPerRow*8;  //Eta cells per row front section
 
+    //Electronic noise parameters
+    //
+    constexpr G4double SampFrac = (2*GeV)/(10*GeV);        //At the moment, let's consider
+                                                           //a simple 20% energy in LAr
+                                                           //of total calo deposition
+    constexpr G4double ElectNoiseSigma = (20*MeV)*SampFrac;//Sigma of 20 MeV equivalent
+                                                           //electronic noise
+
 } //ATLLArBarrelTBConstants
 
 #endif //ATLLArBarrelTBConstants_h 1
