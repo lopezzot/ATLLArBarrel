@@ -14,7 +14,14 @@
 #include "G4VUserPrimaryGeneratorAction.hh"
 #include "globals.hh"
 
+//macros
+//
+#define USEGPS
+
 class G4ParticleGun;
+#ifdef USEGPS
+class G4GeneralParticleSource;
+#endif
 class G4Event;
 
 class ATLLArBarrelPriGenAct : public G4VUserPrimaryGeneratorAction {
@@ -26,7 +33,11 @@ class ATLLArBarrelPriGenAct : public G4VUserPrimaryGeneratorAction {
         virtual void GeneratePrimaries( G4Event* event );
 
     private:
+        #ifdef USEGPS
+        G4GeneralParticleSource* fParticleGun;
+        #else
         G4ParticleGun* fParticleGun;
+        #endif
 };
 
 #endif //ATLLArBarrel_h 1
