@@ -15,7 +15,8 @@ A Geant4 simulation of the ATLAS LAr Barrel beam test setup.<br />
   <ol>
     <li><a href="#project-description">Project description</a></li>
     <li><a href="#authors-and-contacts">Authors and contacts</a></li>
-    <li><a href="#authors-and-contacts">Presentations</a></li>
+    <li><a href="#presentations">Presentations</a></li>
+    <li><a href="#available-datasets-and-analyses">Available datasets and analyses</a></li>
     <li>
       <a href="#how-to">How to</a>
       <ul>
@@ -43,6 +44,15 @@ The project targets a standalone Geant4 simulation of the ATLAS LAr Barrel test 
 <!--Presentations-->
 ## Presentations
 🗣️ CERN EP-SFT Simulation Meeting 21/3/2023, [Towards a Geant4 ATLAS LAr Barrel Validation Test](https://indico.cern.ch/event/1267983/contributions/5325269/attachments/2615458/4520223/lopezzot_21_3_2023.pdf)
+
+<!--Available datasets and analyses-->
+## Available datasets and analyses
+We provide datasets and ROOT analyses, as well as instructions for their reproducibility.
+Ask authors for access to datasets.
+
+| ATLLArBarrel     | Reproduce data | Reproduce analysis | Comments     |
+| -------------    | ----------     | -----------        | -----------  |
+| v0.3 <br /> Dataset #1 <br /> tag 0.3_1 | Geant4-11.1 <br /> ALLArBarrel v0.3 <br /> ./ATLLArBarrel -m runcards/run_gps.mac -pl FTFP_BERT -t 8 | root -l v0.3/ATLLArBarrelAnalysis.c | Preliminary esults for gamma and pi-, assuming run_gps_output/ is alongside root macro. Created on 15/05/2023. |
 
 <!--How to-->
 ## How to
