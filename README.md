@@ -43,7 +43,8 @@ The project targets a standalone Geant4 simulation of the ATLAS LAr Barrel test 
 
 <!--Presentations-->
 ## Presentations
-🗣️ CERN EP-SFT Simulation Meeting 21/3/2023, [Towards a Geant4 ATLAS LAr Barrel Validation Test](https://indico.cern.ch/event/1267983/contributions/5325269/attachments/2615458/4520223/lopezzot_21_3_2023.pdf)
+- 🗣️ CERN EP-SFT Simulation Meeting 16/5/2023, [Preliminary results from the ATLLArBarrel test](https://indico.cern.ch/event/1286851/contributions/5408207/attachments/2648311/4584631/lopezzot_16_5_2023.pdf)
+- 🗣️ CERN EP-SFT Simulation Meeting 21/3/2023, [Towards a Geant4 ATLAS LAr Barrel Validation Test](https://indico.cern.ch/event/1267983/contributions/5325269/attachments/2615458/4520223/lopezzot_21_3_2023.pdf)
 
 <!--Available datasets and analyses-->
 ## Available datasets and analyses
