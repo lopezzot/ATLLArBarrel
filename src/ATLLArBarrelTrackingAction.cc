@@ -32,9 +32,9 @@ void ATLLArBarrelTrackingAction::PostUserTrackingAction(const G4Track* aTrack) {
     //Skip it if the primary particle is not a baryon or meson
     //or the track is not a primary track
     //
-    if(0!=aTrack->GetParentID())return;
-    //if(0!=aTrack->GetParentID() || aTrack->GetParticleDefinition()->GetParticleType()!="baryon"
-    //   || aTrack->GetParticleDefinition()->GetParticleType()!="meson") return;
+    //if(0!=aTrack->GetParentID())return;
+    if(0!=aTrack->GetParentID() || aTrack->GetParticleDefinition()->GetParticleType()!="baryon"
+       || aTrack->GetParticleDefinition()->GetParticleType()!="meson") return;
 
     //Check it the primary baryon/meson had a nuclear breakupi (hadron inelastic process)
     //
